@@ -29,51 +29,52 @@ export const toYearKey = (climate:string, buildYear:number):string | undefined =
 }
 
 /**
- * Compute the co2 emissions for a house in kgCO2
+ * Compute the co2 emissions for a house in kgCO2/year
  *
  * @param house - the house
  *
  * @return
- *   the estimated house emissions in kgCO2
+ *   the estimated house emissions in kgCO2/year
  *   -1 in case of error
  */
 export const getEmission = (house:HouseT):number => {
   const climate = data.climates[house.region];
   const buildYearKey = toYearKey(climate, house.buildYear);
-  if (!data.climates[house.region] || !buildYearKey) return -1;
+  if (!data.climates[house.region] || !buildYearKey || house.surface < 0) return -1;
 
   const energyFactor = data.classes[climate][buildYearKey];
-  const emissionFactor = data.heaters[house.heater].factor;
-  const emissionFactorUnit = data.heaters[house.heater].factorUnit;
+  const emissionFactor = data.heaters[house.heater].emissionFactor;
+  const emissionFactorUnit = data.heaters[house.heater].energyFactor;
   return house.surface * energyFactor * emissionFactor * emissionFactorUnit;
 }
 
 /**
  * Compute the co2 emission consumed in kgCO2 from a list of consumed ressources
+ * Negative values are allowed (this could be due to energy provider correction)
  *
  * @param  consumptions - list consumptions made in unit depending on heater type
  * @param  heater - type of heater in use
  *
  * @return the real emission consummed from bills consumptions
  */
-export const getEmissionConsumed = (consumptions:[number], heater:HeaterT):number => {
+export const getEmissionConsumed = (consumptions:number[], heater:HeaterT):number => {
   let initialEmission = 0;
   const emissions = consumptions.reduce((acc, value) => acc + value, initialEmission);
-  return emissions * data.heaters[heater].factorUnit;
+  return emissions * data.heaters[heater].energyFactor;
 }
 
 /**
- * Compute the co2 emissions reduction from the reduction earned with the work of the house in kgCO2
+ * Compute the co2 emissions reduction from the reduction earned with the work of the house in kgCO2/year
  * Use the emission already computed from house if available, compute first the house emission otherwise.
  *
  * @param house - the house
  * @param works - the type(s) of work(s) made
  *
  * @return
- *   the estimated emissions reduction in kgCO2
+ *   the estimated emissions reduction in kgCO2/year
  *   -1 in case of error
  */
-export const getWorkReduction = (house:HouseT, works:[ReductionT]):number => {
+export const getWorkReduction = (house:HouseT, works:ReductionT[]):number => {
   const emission = house.emission || getEmission(house);
   if (emission < 0) return -1;
 

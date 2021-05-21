@@ -24,15 +24,15 @@ export enum ReductionT {
 
 // Heater factors informations
 export type HeaterI = {
-  factor: number,
-  factorUnit: number,
+  emissionFactor: number,
+  energyFactor: number,
   unit: string,
 }
 
 // House informations
 export type HouseT = {
   buildYear: number, // year the house was built
-  emission?: number, // estimated house emissions in kgCO2
+  emission?: number, // estimated house emissions in kgCO2/year
   heater: HeaterT,   // heater type
   region: string,    // region of the house
   surface: number,   // habitable surface of the house in m2

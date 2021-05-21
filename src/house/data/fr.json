@@ -2,53 +2,53 @@
   "heaters": {
     "ELE": {
       "unit": "kWh",
-      "factor": 0,
-      "factorUnit": 0
+      "emissionFactor": 0,
+      "energyFactor": 0
     },
     "GAS": {
       "unit": "kWh",
-      "factor": 0.187,
-      "factorUnit": 1.110
+      "emissionFactor": 0.187,
+      "energyFactor": 1.110
     },
     "MIN": {
       "unit": "kg",
-      "factor": 2.5,
-      "factorUnit": 0.183
+      "emissionFactor": 2.5,
+      "energyFactor": 0.183
     },
     "OIL": {
       "unit": "L",
-      "factor": 2.68,
-      "factorUnit": 0.110
+      "emissionFactor": 2.68,
+      "energyFactor": 0.110
     },
     "WOO": {
       "unit": "stere",
-      "factor": 0,
-      "factorUnit": 0
+      "emissionFactor": 0,
+      "energyFactor": 0
     },
     "HPU": {
       "unit": "kWh",
-      "factor": 0,
-      "factorUnit": 0.333
+      "emissionFactor": 0,
+      "energyFactor": 0.333
     },
     "HEA": {
       "unit": "kg",
-      "factor": 0.056,
-      "factorUnit": 0.002
+      "emissionFactor": 0.056,
+      "energyFactor": 0.002
     },
     "PET": {
       "unit": "L",
-      "factor": 2.57,
-      "factorUnit": 0
+      "emissionFactor": 2.57,
+      "energyFactor": 0
     },
     "CIT": {
       "unit": "kg",
-      "factor": 2.980,
-      "factorUnit": 0.085
+      "emissionFactor": 2.980,
+      "energyFactor": 0.085
     },
     "BUT": {
       "unit": "kg",
-      "factor": 2.980,
-      "factorUnit": 0.085
+      "emissionFactor": 2.980,
+      "energyFactor": 0.085
     }
   },
   "classes": {
@@ -58,7 +58,7 @@
       "1978": 180,
       "1983": 150,
       "1989": 120,
-      "2001": 80
+      "2001": 100
     },
     "H2": {
       "0": 212.5,
@@ -66,7 +66,7 @@
       "1978": 153,
       "1983": 127.5,
       "1989": 102,
-      "2001": 68
+      "2001": 85
     },
     "H3": {
       "0": 175,
@@ -74,7 +74,7 @@
       "1978": 126,
       "1983": 105,
       "1989": 84,
-      "2001": 56
+      "2001": 70
     }
   },
   "climates": {
