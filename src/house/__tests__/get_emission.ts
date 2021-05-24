@@ -103,7 +103,6 @@ const GAS_DATA = [
   },
 ];
 
-
 describe("Testing emission using wrong parameters", () => runner(WRONG_DATA));
 describe("Testing GAS emission", () => runner(GAS_DATA));
 //...
