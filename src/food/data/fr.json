@@ -1,0 +1,14 @@
+{
+  "foods": {
+    "REDMEAT": { "emissionFactor": 12.8, "averageWeight": 150, "wasteEmissionFactor": 0.05},
+    "WHITEMEAT": { "emissionFactor": 3, "averageWeight": 150, "wasteEmissionFactor": 0.05},
+    "FISH": { "emissionFactor": 3.5, "averageWeight": 150, "wasteEmissionFactor": 0.05},
+    "LGSAI": { "emissionFactor": 0.3, "averageWeight": 300, "wasteEmissionFactor": 0.05},
+    "LGEXO": { "emissionFactor": 2.24, "averageWeight":300, "wasteEmissionFactor": 0.05},
+    "CHEESE": { "emissionFactor": 2.7, "averageWeight": 125, "wasteEmissionFactor": 0.05},
+    "RICE": { "emissionFactor": 2.9, "averageWeight": 150, "wasteEmissionFactor": 0.05},
+    "ALCOHOL": { "emissionFactor": 2.1, "averageWeight": 330, "wasteEmissionFactor": 1.15},
+    "SOFT": { "emissionFactor": 1.65, "averageWeight": 330, "wasteEmissionFactor": 2.65},
+    "BREAD": { "emissionFactor": 1.52, "averageWeight": 50, "wasteEmissionFactor": 0.05}
+  }
+}
