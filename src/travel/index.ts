@@ -1,5 +1,8 @@
-import { DataI, SeatT } from './types';
-import dataJSON from './data/airports.json';
+import { AirportsI, DataI, SeatT } from './types';
+import airportsJSON from './data/airports.json';
+import dataJSON from './data/median.json';
+
+const airports = airportsJSON as AirportsI;
 const data = dataJSON as DataI;
 
 const EARTH_RADIUS = 6371; // Radius of the earth in Km
@@ -51,8 +54,8 @@ export const getDistance = (fromLat:number, fromLon:number, toLat:number, toLon:
  */
 export const getEmission =
 (fromIata:string, toIata:string, nbPassengers:number, seatType:SeatT, nbFlights:number):number => {
-  const fromAirport = data[fromIata];
-  const toAirport = data[toIata];
+  const fromAirport = airports[fromIata];
+  const toAirport = airports[toIata];
 
   if (!fromAirport || !toAirport || nbPassengers < 0 || nbFlights < 0) return -1;
 
@@ -60,5 +63,5 @@ export const getEmission =
 
   const distance = getDistance(fromAirport.lat, fromAirport.lon, toAirport.lat, toAirport.lon);
 
-  return emission * distance * nbFlights;
+  return emission * distance * nbFlights * data.seats[seatType];
 }

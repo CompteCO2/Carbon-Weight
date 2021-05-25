@@ -14,6 +14,11 @@ export enum SeatT {
   First = "First"
 }
 
+// Data factors constant used to compute emissions
+export type DataI = {
+ seats: { [key: string]: number }
+}
+
 // Travel informations
 export type TravelI = {
   from: AirportI,        // Airport of departure
@@ -24,4 +29,4 @@ export type TravelI = {
 
 // Interface of data used to compute distance - IATA is used as the key
 // International Air Transport Association's (IATA) unique 3-letter identifier
-export type DataI = { [key: string]: AirportI }
+export type AirportsI = { [key: string]: AirportI }
