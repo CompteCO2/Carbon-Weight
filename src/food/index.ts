@@ -1,36 +1,81 @@
-import { DataI, ComsumptionR, ConsumptionT } from './types';
+import { BuildData,  DataI, DataR, FoodT, ComsumptionR, ConsumptionT } from './types';
 import dataJSON from './data/fr.json';
-const data = dataJSON as DataI;
-const rangeByWeek = { min: 0, max: 14 };
+const dataR = dataJSON as DataR;
+const data = BuildData(dataR);
+const WEEK_RANGE = { min: 0, max: 14 };
+let avgEmission:ComsumptionR|undefined = undefined; // Singleton average computation
 
 /**
- * Compute a rough co2 estimation from eatin habits in kgCO2/year
+ * Return the current data constants loaded
+ *
+ * @return constant data loaded
+ */
+export const geData = ():DataI => { return data; }
+
+/**
+ * Return the average co2 estimation from eating habits in kgCO2e/year.
+ *
+ * @description
+ * It takes the average adult consumption of different foods expressed in g/day from trusted source.
+ * The formulat we use is as simple as (where frequency is given by week) :
+ *
+ * emission = SUM[(dailyAvg * 365) / 1000 * carbonEmissionFactor]
+ * [kgCO2e/year] = (365[g/day]) / 1000 * [kgCO2e/kg]
+ *
+ * waste = SUM[(daily * 365) / 1000 * wasteRatioFactor * wasteEmissionFactor]
+ * [kgCO2e/year] = (365[g/day]) / 1000 * [kgPackaging/kg] * [kgCO2e/kgPackaging]
+ *
+ * @warning
+ * Implementation is defined as a lazy singleton that compute only once.
+ *
+ * @return
+ * The estimated co2 emission in kgCO2e/year
+ */
+export const getEmissionAvg = ():ComsumptionR => {
+  if (avgEmission) return { emission:avgEmission.emission, waste:avgEmission.waste }
+  let emission = 0;
+  let waste = 0;
+  for (const value of Object.values(data.foods)) {
+    const yearlyWeight = value.averageWeightDay * 365 / 1000; // (from g to Kg)
+    emission += yearlyWeight * value.emissionFactor;
+    waste += yearlyWeight * value.wasteRatioFactor * value.wasteEmissionFactor;
+  }
+  avgEmission = { emission, waste }
+
+  return avgEmission;
+}
+
+/**
+ * Compute a rough co2 estimation from eating habits in kgCO2e/year
  *
  * @description
  * Your food carbon footprint is by design a best estimate.
- * Indeed, how can you EXACTLY count the number of pineapples imported by plane,
- * all the kilos of frozen asparagus, etc, that you have eaten this year?
  * This approximation still allows you to get an order of magnitude and act.
- * The formulat we use is as simple as (where frequency is given by week) :
- * emission = (frequency x QTE / 1000) x 52 x carbonEmissionFactor
- * waste = (frequency x QTE / 1000) x 52 x carbonWasteEmissionFactor
  *
- * @param consumption - consumed products by week
+ * The formulat we use is as simple as (where frequency is given by week) :
+ *
+ * emission = SUM[(weaklyConsumed * averageWeight * 52) / 1000 * carbonEmissionFactor]
+ * [kgCO2e/year] = (52[g/week]) / 1000 * [kgCO2e/kg]
+ *
+ * waste = SUM[(weaklyConsumed * averageWeight * 52) / 1000 * wasteRatioFactor * wasteEmissionFactor]
+ * [kgCO2e/year] = (52[g/week]) / 1000 * [kgPackaging/kg] * [kgCO2e/kgPackaging]
+ *
+ * @param consumption - consumed products in meal/week
  *
  * @return
- *   the estimated emission  emissions in kgCO2/year
- *   -1 in case of error
+ *   the estimated emission emissions in kgCO2e/year
+ *   { -1, -1 } in case of error
  */
 export const getEmission = (consumption:ConsumptionT):ComsumptionR => {
   let emission = 0;
   let waste = 0;
   for (const [key, value] of Object.entries(consumption)) {
     if (!value) continue;
-    if (value < rangeByWeek.min || value > rangeByWeek.max) return { emission, waste };
-
-    const yearlyWeight = ((value * data.foods[key].averageWeight)) * 52 / 1000; // (from g to Kg)
-    emission += yearlyWeight * data.foods[key].emissionFactor;
-    waste += yearlyWeight * data.foods[key].wasteEmissionFactor;
+    if (value < WEEK_RANGE.min || value > WEEK_RANGE.max) return { emission: -1, waste: -1 };
+    const food = key as keyof typeof FoodT;
+    const yearlyWeight = ((value * data.foods[food].averageWeight)) * 52 / 1000; // (from g to Kg)
+    emission += yearlyWeight * data.foods[food].emissionFactor;
+    waste += yearlyWeight * data.foods[food].wasteRatioFactor * data.foods[food].wasteEmissionFactor;
   }
 
   return { emission, waste };

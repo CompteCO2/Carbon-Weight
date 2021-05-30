@@ -46,7 +46,7 @@ export const getDistance = (fromLat:number, fromLon:number, toLat:number, toLon:
 /**
  * Compute the co2 emissions from air travels in kgCO2
  *
- * @param house - the house
+ * @param flight - the house
  *
  * @return
  *   the estimated flight emissions for the passengers in kgCO2
