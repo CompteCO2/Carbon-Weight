@@ -28,18 +28,18 @@ Here are the factor units in use:
 - [kgCO2e/year] = (52[g/week]) / 1000 * [kgPackaging/kg] * [kgCO2e/kgPackaging]
 
 Want more insight about the factors in use ? Here is the wiki page dedicated:
-### [Food Emissions Factors](/wiki/Food-Emissions.md)
+### [Food Emissions Factors](/wiki/food.md)
 
 ## Flight Emissions
 Firstly the distances are calculated between the airports selected. This is then multiplied by the appropriate emissions factor specific to the type of flight (short haul or long haul) and the class of seat taken (e.g. economy class, business class etc.). The emissions factors include the distance uplift to compensate for planes not flying using the most direct route i.e. flying around international airspace, stacking etc.
 
 Want more insight about the distance computation and factors in use ? Here is the wiki page dedicated:
-### [Flight Emissions Factors](/wiki/Flight-Emissions.md)
+### [Flight Emissions Factors](/wiki/flight.md)
 
 ## House Emissions
 
 Want more insight about the classifications and factors in use ? Here is the wiki page dedicated:
-### [House Emissions Factors](/wiki/House-Emissions.md)
+### [House Emissions Factors](/wiki/house.md)
 
 ## Vehicle Emissions
 The carbon footprint from car usage can be calculated using different methods, providing the result in differing levels of accuracy. We propose two computations :
@@ -55,7 +55,7 @@ The last one is the least precise, but still allows you to get a fairly good CO2
 estimation of your vehicle from only the car type and your annual mileage.
 
 Want more insight about the different methods and factors in use ? Here is the wiki page dedicated:
-### [Vehicle Emissions Factors](/wiki/Vehicle-Emissions.md)
+### [Vehicle Emissions Factors](/wiki/vehicle.md)
 
 # Contribute
 See contributing.md for ways to get started. See support.md for ways to get help. Ideas for new plugins and tools are welcome and can be posted in issues with the "enhancement" label.
