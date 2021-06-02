@@ -1,4 +1,4 @@
-import { BuildData,  DataI, DataR, FoodT, ComsumptionR, ConsumptionT } from './types';
+import { BuildData,  DataI, DataR, FoodE, ComsumptionR, ConsumptionT } from './types';
 import dataJSON from './data/fr.json';
 const dataR = dataJSON as DataR;
 const data = BuildData(dataR);
@@ -72,7 +72,7 @@ export const getEmission = (consumption:ConsumptionT):ComsumptionR => {
   for (const [key, value] of Object.entries(consumption)) {
     if (!value) continue;
     if (value < WEEK_RANGE.min || value > WEEK_RANGE.max) return { emission: -1, waste: -1 };
-    const food = key as keyof typeof FoodT;
+    const food = key as keyof typeof FoodE;
     const yearlyWeight = ((value * data.foods[food].averageWeight)) * 52 / 1000; // (from g to Kg)
     emission += yearlyWeight * data.foods[food].emissionFactor;
     waste += yearlyWeight * data.foods[food].wasteRatioFactor * data.foods[food].wasteEmissionFactor;

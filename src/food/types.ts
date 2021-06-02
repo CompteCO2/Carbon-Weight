@@ -1,5 +1,5 @@
 // Food types available
-export enum FoodT {
+export enum FoodE {
   alcohol = "alcohol",
   bread = "bread",
   cheese = "cheese",
@@ -13,7 +13,7 @@ export enum FoodT {
 }
 
 // Waste types available
-export enum WasteT {
+export enum WasteE {
   cardboard = "cardboard",
   fat_butter = "fat_butter",
   glass_bottle = "glass_bottle",
@@ -61,7 +61,7 @@ export type DataR = {
 
 // Interface of computed data factors used to compute emission
 export type DataI = {
-  foods: {[key in keyof typeof FoodT]: FoodI}
+  foods: {[key in keyof typeof FoodE]: FoodI}
 }
 
 /**
@@ -77,13 +77,13 @@ export const BuildData = (dataR:DataR):DataI => {
     const averageWeightDay = Object.values(value.averageWeightDay).reduce((a, b) => a + b);
     const emissionFactors = Object.values(value.emissionFactors);
     const emissionFactor = emissionFactors.reduce((a, b) => a + b) / emissionFactors.length;
-    const food = key as keyof typeof FoodT;
+    const food = key as keyof typeof FoodE;
     (data.foods[food] as FoodI) = {
       averageWeight: value.averageWeight,
       averageWeightDay: averageWeightDay,
       emissionFactor: emissionFactor,
-      wasteEmissionFactor: dataR.wastes[value.wasteEmissionFactor].packaging,
-      wasteRatioFactor: dataR.wastes[value.wasteEmissionFactor].ratio
+      wasteEmissionFactor: dataR.wastes[value.wasteEmissionFactor as WasteE].packaging,
+      wasteRatioFactor: dataR.wastes[value.wasteEmissionFactor as WasteE].ratio
     };
   });
 
@@ -91,7 +91,7 @@ export const BuildData = (dataR:DataR):DataI => {
 }
 
 // Consumption informations [foodT/week]
-export type ConsumptionT = {[key in keyof typeof FoodT]: number};
+export type ConsumptionT = {[key in keyof typeof FoodE]: number};
 
 // Compution type returned from computation
 export type ComsumptionR = {

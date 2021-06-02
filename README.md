@@ -1,5 +1,5 @@
 # Carbon-Weight
-Carbon Footprint Calculator For Individuals And Households. This carbon footprint calculation allows you to estimate and calculate your personal or business carbon footprint whether it comes from housing, travels, transportation or food habits.
+Carbon Footprint Calculator For Individuals And Households. This carbon footprint calculation allows you to estimate and calculate your personal or business carbon footprint whether it comes from **housing, travels, transportation or food habits**.
 
 You may directly use this calculator online from https://myco2emission.com/ (by https://www.compteco2.com/ - migration in progress).
 
@@ -47,7 +47,7 @@ The carbon footprint from car usage can be calculated using different methods, p
 - **From Registration Card**: Type of Fuel, Annual Mileage and constructor MPG.
 - **From Car Type**: Annual Mileage and the gCO2/km figure (explained below).
 
-Although the first computation method is the most precise, it relies on a parameter that could be quite incertain (depends on personal measure) or even unknown. Indeed, the exact MPG (real consumption) for the period of the annual mileage could be difficult to get with precision if not measured properly.
+Although the first computation method is the most precise, it relies on a parameter that could be quite uncertain (depends on personal measure) or even unknown. Indeed, the exact MPG (real consumption) for the period of the annual mileage could be difficult to get with precision if not measured properly.
 
 This is the best choice if you cannot guarantee the actual MPG. This method is based on the constructor factor emission corrected by the vehicle age.
 

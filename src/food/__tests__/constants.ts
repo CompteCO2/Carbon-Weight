@@ -1,6 +1,6 @@
 // Those tests are to ensured a constant change has been done properly.
 import { geData, getEmissionAvg } from '../';
-import { BuildData, FoodT } from '../types';
+import { BuildData, FoodE } from '../types';
 
 describe("Testing constants - Testing the national average", () => {
   const emissionAvg = getEmissionAvg();
@@ -10,7 +10,7 @@ describe("Testing constants - Testing the national average", () => {
   test("Check national emission - Singleton", () => expect(newEmission.emission).toBeCloseTo(2562.5, 0));
 });
 
-describe("Testing constants - Make sure data loaded", () => { 
+describe("Testing constants - Make sure data loaded", () => {
   const data = geData();
   test("Check data", () => expect(data.foods).toBeDefined());
   test("Check minimum data fields", () => expect(Object.keys(data.foods).length).toBeGreaterThan(9));
@@ -43,25 +43,25 @@ describe("Testing constants build - Make sure data are converted properly", () =
 
   // White Meat
   test("Check whiteMeat averageWeight", () =>
-    expect(data.foods[FoodT.meatWhite].averageWeight).toBe(150));
+    expect(data.foods[FoodE.meatWhite].averageWeight).toBe(150));
   test("Check whiteMeat averageWeightDay", () =>
-    expect(data.foods[FoodT.meatWhite].averageWeightDay).toBeCloseTo(52.9));
+    expect(data.foods[FoodE.meatWhite].averageWeightDay).toBeCloseTo(52.9));
   test("Check whiteMeat emissionFactor", () =>
-    expect(data.foods[FoodT.meatWhite].emissionFactor).toBeCloseTo(5));
+    expect(data.foods[FoodE.meatWhite].emissionFactor).toBeCloseTo(5));
   test("Check whiteMeat waste packaging", () =>
-    expect(data.foods[FoodT.meatWhite].wasteEmissionFactor).toBeCloseTo(2.09));
+    expect(data.foods[FoodE.meatWhite].wasteEmissionFactor).toBeCloseTo(2.09));
   test("Check whiteMeat waste packaging", () =>
-    expect(data.foods[FoodT.meatWhite].wasteRatioFactor).toBeCloseTo(0.05));
+    expect(data.foods[FoodE.meatWhite].wasteRatioFactor).toBeCloseTo(0.05));
 
   // Local Harvest
   test("Check harvestLocal averageWeight", () =>
-    expect(data.foods[FoodT.harvestLocal].averageWeight).toBe(200));
+    expect(data.foods[FoodE.harvestLocal].averageWeight).toBe(200));
   test("Check harvestLocal averageWeightDay", () =>
-    expect(data.foods[FoodT.harvestLocal].averageWeightDay).toBeCloseTo(222.7));
+    expect(data.foods[FoodE.harvestLocal].averageWeightDay).toBeCloseTo(222.7));
   test("Check harvestLocal emissionFactor", () =>
-    expect(data.foods[FoodT.harvestLocal].emissionFactor).toBeCloseTo(1.3));
+    expect(data.foods[FoodE.harvestLocal].emissionFactor).toBeCloseTo(1.3));
   test("Check harvestLocal waste packaging", () =>
-    expect(data.foods[FoodT.harvestLocal].wasteEmissionFactor).toBeCloseTo(0.919));
+    expect(data.foods[FoodE.harvestLocal].wasteEmissionFactor).toBeCloseTo(0.919));
   test("Check harvestLocal waste packaging", () =>
-    expect(data.foods[FoodT.harvestLocal].wasteRatioFactor).toBeCloseTo(0.1));
+    expect(data.foods[FoodE.harvestLocal].wasteRatioFactor).toBeCloseTo(0.1));
 });
