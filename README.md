@@ -1,5 +1,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![GitHub top language](https://img.shields.io/github/languages/top/CompteCO2/Carbon-Weight)
+![GitHub issues](https://img.shields.io/github/issues/CompteCO2/Carbon-Weight)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/CompteCO2/Carbon-Weight)
 
 # Carbon-Weight
 Carbon Footprint Calculator For Individuals And Households. This carbon footprint calculation allows you to estimate and calculate your personal or business carbon footprint whether it comes from **housing, travels, transportation or food habits**.
