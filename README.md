@@ -4,22 +4,28 @@
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/CompteCO2/Carbon-Weight)
 
 # Carbon-Weight
-Carbon Footprint Calculator For Individuals And Households. This carbon footprint calculation allows you to estimate and calculate your personal or business carbon footprint whether it comes from **housing, travels, transportation or food habits**.
+Carbon Footprint Calculator For Individuals And Households. This carbon footprint calculation allows you to estimate and calculate your personal or business carbon footprint whether it comes from **housing, travels, transportation or food habits** (made by https://www.compteco2.com/).
 
-You may directly use this calculator online from https://myco2emission.com/ (by https://www.compteco2.com/ - migration in progress).
+You may directly use this calculator online from https://myco2emission.com/ (WIP).
 
-You may embed the calculator to your webpage or blog post using the following HTML code (in progress):
+You may embed the calculator to your webpage or blog post using the following HTML code (WIP):
 ```
 <iframe width="900" height="600" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" src="https://compteco2.com/carbon-weight"></iframe>
 ```
 
-You may also install the self contained npm package to use it from your own projects (in progress).
+You may also install the self contained npm package to use it from your own projects (WIP).
 ```
 npm i @cco2/carbon-weight
 ```
 
-# Build - Documentation - tests
-Build:
+# Build
+**Prerequisites**
+```
+Git
+Node.js >= 12 (tip: use nvm or n to manage multiple Node versions)
+```
+
+**Build**
 ```
 nvm use # Check supported version
 npm i
@@ -27,9 +33,9 @@ npm run build-all
 ```
 
 This will:
-- Run the unit tests and display coverages.
 - Run the linter.
 - Build the source code.
+- Run the unit tests and display coverages.
 - Generate the documentation as interactive HTML pages (typedoc).
 
 # Methodology & Data

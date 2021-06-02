@@ -35,8 +35,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
-    "build-all": "npm run test && npm run lint && tsc && npm run docs",
+    "build": "npm run lint && tsc && npm run test",
+    "build-all": "npm run lint && tsc && npm run test && npm run docs",
     "docs": "typedoc",
     "lint": "eslint -c .eslintrc.json",
     "test": "jest  --env=node --colors --coverage test"
