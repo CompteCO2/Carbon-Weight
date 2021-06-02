@@ -1,7 +1,7 @@
 # Vehicle Emissions
 The carbon footprint from car usage can be calculated using different methods, providing the result in differing levels of accuracy. We propose two computations :
 - **From Fuel Consumption**: Type of Fuel and, Consumption or Annual Mileage and actual MPG.
-- **From Registration Card**: Type of Fuel, Mileage and gCO2e/km (constructor).
+- **From Registration Card**: Type of Fuel, Mileage and original emission factor or consumption factor.
 - **From Vehicle Type**: Annual Mileage and the gCO2e/km figure (explained below).
 
 Although the first computation method is the most precise, it relies on a parameter that could be quite uncertain (depends on personal measure) or even unknown. Indeed, the exact MPG (or real fuel consumption) for the period of the annual mileage could be difficult to get with precision if not measured properly.

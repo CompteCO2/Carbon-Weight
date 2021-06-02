@@ -43,23 +43,20 @@ Want more insight about the classifications and factors in use ? Here is the wik
 
 ## Vehicle Emissions
 The carbon footprint from car usage can be calculated using different methods, providing the result in differing levels of accuracy. We propose two computations :
-- **From Fuel Consumption**: Type of Fuel, Annual Mileage and actual MPG.
-- **From Registration Card**: Type of Fuel, Annual Mileage and constructor MPG.
+- **From Fuel Consumption**: Type of Fuel and, Consumption or Annual Mileage and actual MPG.
+- **From Registration Card**: Type of Fuel, Mileage and original emission factor or consumption factor.
 - **From Car Type**: Annual Mileage and the gCO2/km figure (explained below).
 
 Although the first computation method is the most precise, it relies on a parameter that could be quite uncertain (depends on personal measure) or even unknown. Indeed, the exact MPG (real consumption) for the period of the annual mileage could be difficult to get with precision if not measured properly.
 
 This is the best choice if you cannot guarantee the actual MPG. This method is based on the constructor factor emission corrected by the vehicle age.
 
-The last one is the least precise, but still allows you to get a fairly good CO2 emission
-estimation of your vehicle from only the car type and your annual mileage.
+The last one is the least precise, but still allows you to get a fairly good CO2 emission estimation of your vehicle from only the car type and your annual mileage.
 
 Want more insight about the different methods and factors in use ? Here is the wiki page dedicated:
 ### [Vehicle Emissions Factors](/wiki/vehicle.md)
 
 # Contribute
-See contributing.md for ways to get started. See support.md for ways to get help. Ideas for new plugins and tools are welcome and can be posted in issues with the "enhancement" label.
+Send me a mail at michael.jeulin-lagarrigue@compteco2.com for ways to get help or getting started contributing. Ideas for new plugins and tools are welcome and can be posted in issues with the "enhancement" label.
 
 A curated list of awesome resources can be found within our wiki, do no hesitate to provide us other country data from trusted source (Government, Government operator, Public Agency, Recognized ONG).
-
-This project has a code of conduct. By interacting with this repository, organization, or community you agree to abide by its terms.
