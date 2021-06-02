@@ -13,6 +13,20 @@ You may also install the self contained npm package to use it from your own proj
 npm i @cco2/carbon-weight
 ```
 
+# Build - Documentation - tests
+Build:
+```
+nvm use # Check supported version
+npm i
+npm run build-all
+```
+
+This will:
+- Run the unit tests and display coverages.
+- Run the linter.
+- Build the source code.
+- Generate the documentation as interactive HTML pages (typedoc).
+
 # Methodology & Data
 Here are the methodologies and data used for our CO2 emission calculator. Please keep in mind that all emission computed are given in **kgCO2e/year**.
 

@@ -1,8 +1,5 @@
 {
-  "out": "docs",
-  "module": "commonjs",
-  "mode": "file",
-  "excludePrivate": true,
-  "excludeProtected": true,
-  "src": "src"
+  "entryPoints": ["./src"],
+  "exclude": "**/__tests__",
+  "out": "doc"
 }
