@@ -4,27 +4,37 @@ export type AirportI = {
   city: string,        // City of the airport
   country: string,     // Country of the airport
   lat: number,         // Lattitude of the airport localization
-  lon: number,        // Longitude of the airport localization
+  lon: number,         // Longitude of the airport localization
 }
 
-// SeatT type of seat used in the plane
-export enum SeatT {
-  Economy = "Economy",
-  Business = "Business",
-  First = "First"
+// SeatE type of seat used in the plane
+export enum SeatE {
+  economy = "economy",
+  business = "business",
+  first = "first"
+}
+
+// HaulE type of haul used to categorize a flight
+export enum HaulE {
+  long = "long",
+  medium = "medium",
+  short = "short"
 }
 
 // Data factors constant used to compute emissions
 export type DataI = {
- seats: { [key: string]: number }
+  averageEmission: number,
+  hauls: { [key in keyof typeof HaulE]: { maxKm:number, emissionFactor:number } }
+  seats: { [key: string]: number }
 }
 
 // Travel informations
 export type TravelI = {
-  from: AirportI,        // Airport of departure
-  to: AirportI,          // Airport of arrival
+  fromIATA: string,        // Airport of departure
+  toIATA: string,          // Airport of arrival
   nbPassengers: number,  // Number of passengers
-  seatType: SeatT
+  roundTrip: boolean,    // Is Round-Trip
+  seatType: SeatE
 }
 
 // Interface of data used to compute distance - IATA is used as the key

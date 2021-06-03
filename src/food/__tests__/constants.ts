@@ -1,5 +1,5 @@
 // Those tests are to ensured a constant change has been done properly.
-import { geData, getEmissionAvg } from '../';
+import { getData, getEmissionAvg } from '../';
 import { BuildData, FoodE } from '../types';
 
 describe("Testing constants - Testing the national average", () => {
@@ -11,7 +11,7 @@ describe("Testing constants - Testing the national average", () => {
 });
 
 describe("Testing constants - Make sure data loaded", () => {
-  const data = geData();
+  const data = getData();
   test("Check data", () => expect(data.foods).toBeDefined());
   test("Check minimum data fields", () => expect(Object.keys(data.foods).length).toBeGreaterThan(9));
 });

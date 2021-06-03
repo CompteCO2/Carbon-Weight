@@ -10,7 +10,7 @@ let avgEmission:ComsumptionR|undefined = undefined; // Singleton average computa
  *
  * @return constant data loaded
  */
-export const geData = ():DataI => { return data; }
+export const getData = ():DataI => { return data; }
 
 /**
  * Return the average co2 estimation from eating habits in kgCO2e/year.

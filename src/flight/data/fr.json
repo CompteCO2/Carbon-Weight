@@ -1,0 +1,22 @@
+{
+  "averageEmission": 13586,
+  "hauls": {
+    "long": {
+      "maxKm": 20000,
+      "emissionFactor": 0.083
+    },
+    "medium": {
+      "maxKm": 3500,
+      "emissionFactor": 0.102
+    },
+    "short": {
+      "maxKm": 1000,
+      "emissionFactor": 0.141
+    }
+  },
+  "seats": {
+    "economy": 1,
+    "business": 2.2,
+    "first": 4
+  }
+}

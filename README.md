@@ -40,7 +40,19 @@ This will:
 - Generate the documentation as interactive HTML pages (typedoc).
 
 # Methodology & Data
-Here are the methodologies and data used for our CO2 emission calculator. Please keep in mind that all emission computed are given in **kgCO2e/year**.
+Here are the methodologies and data used for our CO2 emission calculator. Please keep in mind that all emission computed are given in **kgCO2e/year**. The data sourced below come from the French Government and UE Official agencies. Fell free to add you own data and contribute with them to enhance internationalization capacity.
+
+## Flight Emissions
+First, the distances are calculated between the airports selected, using the greater circle method: we compute the **distance in Km** from longitude and latitude using the haversine formula (cf. https://en.wikipedia.org/wiki/Haversine_formula).
+
+Then we can use the factor emission (cf. wiki below) to get our first estimation per equivalent person:
+- Emission = Distance * Factor
+- [kgCO2e/year] = [Km/year] * [kgCO2e/km]
+
+Finally, we add a factor depending on the class of the seat taken (economy class, business class, first class). Connections are not taken into account.
+
+Want more insight about the distance computation and factors in use ? Here is the wiki page dedicated:
+### [Flight Emissions Factors](/wiki/flight.md)
 
 ## Food Emissions
 The idea is to compute a quite rough co2 emission (kgCO2e/year) estimate from weekly eating habits. The weekly consumption based has been choosen for its convenience to be estimated by an individual.
@@ -55,12 +67,6 @@ Here are the factor units in use:
 
 Want more insight about the factors in use ? Here is the wiki page dedicated:
 ### [Food Emissions Factors](/wiki/food.md)
-
-## Flight Emissions
-Firstly the distances are calculated between the airports selected. This is then multiplied by the appropriate emissions factor specific to the type of flight (short haul or long haul) and the class of seat taken (e.g. economy class, business class etc.). The emissions factors include the distance uplift to compensate for planes not flying using the most direct route i.e. flying around international airspace, stacking etc.
-
-Want more insight about the distance computation and factors in use ? Here is the wiki page dedicated:
-### [Flight Emissions Factors](/wiki/flight.md)
 
 ## House Emissions
 
