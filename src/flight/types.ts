@@ -29,7 +29,7 @@ export type DataI = {
 }
 
 // Travel informations
-export type TravelI = {
+export type FlightI = {
   fromIATA: string,        // Airport of departure
   toIATA: string,          // Airport of arrival
   nbPassengers: number,  // Number of passengers

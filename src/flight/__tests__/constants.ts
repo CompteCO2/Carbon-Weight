@@ -22,5 +22,4 @@ describe("Testing constants - Test emission factor constants (AVG - Haul)", () =
   test("Check data: Long Haul", () => expect(getHaulFactor(9362)).toBe(0.083));
   test("Check data: Medium Haul", () => expect(getHaulFactor(2200)).toBe(0.102));
   test("Check data: Short Haul", () => expect(getHaulFactor(857)).toBe(0.141));
-  test("Check data: Does Not Exists", () => expect(getHaulFactor(29362)).toBe(-1));
 });

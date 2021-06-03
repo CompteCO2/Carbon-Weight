@@ -1,4 +1,4 @@
-import { AirportsI, DataI, HaulE, TravelI } from './types';
+import { AirportsI, DataI, FlightI, HaulE } from './types';
 import airportsJSON from './data/airports.json';
 import dataJSON from './data/fr.json';
 
@@ -53,15 +53,12 @@ export const getDistance = (fromLat:number, fromLon:number, toLat:number, toLon:
   *
   * @param distance - distance of the flight in Km
   *
-  * @return
-  * emission factor in kgCO2e/peq.km
-  * -1 in case of error (distance not handled)
+  * @return emission factor in kgCO2e/peq.km
   */
  export const getHaulFactor = (distance:number):number => {
    if (distance <= data.hauls[HaulE.short].maxKm) return data.hauls[HaulE.short].emissionFactor;
    if (distance <= data.hauls[HaulE.medium].maxKm) return data.hauls[HaulE.medium].emissionFactor;
-   if (distance <= data.hauls[HaulE.long].maxKm) return data.hauls[HaulE.long].emissionFactor;
-   return -1;
+   return data.hauls[HaulE.long].emissionFactor;
   }
 
 /**
@@ -85,18 +82,18 @@ export const getDistance = (fromLat:number, fromLon:number, toLat:number, toLon:
  *   the estimated flight emissions for the passengers in kgCO2e
  *   -1 in case of error (e.g. missing IATA airport)
  */
-export const getEmission = (travel:TravelI, nbFlights:number):number => {
+export const getEmission = (travel:FlightI, nbFlights:number):number => {
   const fromAirport = airports[travel.fromIATA];
   const toAirport = airports[travel.toIATA];
 
   if (!fromAirport || !toAirport || travel.nbPassengers < 0 || nbFlights < 0) return -1;
 
   const distance = getDistance(fromAirport.lat, fromAirport.lon, toAirport.lat, toAirport.lon);
+  const roundTripFactor = travel.roundTrip ? 2 : 1;
   const emissionFactor = getHaulFactor(distance);
 
-  if (emissionFactor < 0) return -1;
-
-  return  distance * nbFlights * emissionFactor * data.seats[travel.seatType];
+  return  travel.nbPassengers * nbFlights * roundTripFactor *
+          distance * emissionFactor * data.seats[travel.seatType];
 }
 
 /**

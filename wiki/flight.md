@@ -37,4 +37,7 @@ Note: The distance definition for the haul classification from UK does not stick
  Our national co2 emission average "getEmissionAvg()" give us:
  - **13 586 peq.kgCO2e/year from food consumption**
 
-This constant is the ratio emission(2019)/#passengers(2019) from the Directorate General of Civil Aviation (DGAC). Only emissions from TARMAAC source commercial aviation, including APU, are considered here (https://eco-calculateur.dta.aviation-civile.gouv.fr/les-chiffres-cles).
+This constant is the ratio emission(2019)/#passengers(2019) from the Directorate General of Civil Aviation (DGAC). Only emissions from TARMAAC source commercial aviation, including APU, are considered here (https://eco-calculateur.dta.aviation-civile.gouv.fr/les-chiffres-cles):
+- **Emission**: 2,44 mtCO2e
+- **Passengers**: 179.6 millions
+- **Flights**: 1,57 millions
