@@ -9,5 +9,7 @@ cache:
 jobs:
   include:
     - stage: release
-      script:
-        - npm run test
+      scripts:
+        - npm install codecov -g
+      after_success:
+        - codecov
