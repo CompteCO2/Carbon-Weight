@@ -3,6 +3,7 @@
 ![GitHub issues](https://img.shields.io/github/issues/CompteCO2/Carbon-Weight)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/CompteCO2/Carbon-Weight)
 [![Build Status](https://travis-ci.org/CompteCO2/Carbon-Weight.svg?branch=main)](https://travis-ci.org/CompteCO2/Carbon-Weight)
+![Codecov](https://img.shields.io/codecov/c/github/CompteCO2/Carbon-Weight)
 
 # Carbon-Weight
 Carbon Footprint Calculator For Individuals And Households. This carbon footprint calculation allows you to estimate and calculate your personal or business carbon footprint whether it comes from **housing, travels, transportation or food habits** (made by https://www.compteco2.com/).
