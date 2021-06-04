@@ -16,21 +16,21 @@ export enum VehicleE {
 
 // Consumption informations
 export type ConsumptionT = {
-  consumption?: number,    // Vehicule fuel consumption in L
+  consumption?: number,    // Vehicle fuel consumption in L
   distanceByYear?: number, // Distance yearly made in Km
   fuel: FuelE,             // Fuel type
-  mpg?: number,            // Vehicule fuel consumption in L/100Km
+  mpg?: number,            // Vehicle fuel consumption in L/100Km
 }
 
-// Vehicule informations
+// Vehicle informations
 export type VehicleT = {
-  consumption?: number,     // Vehicule fuel consumption in L/100Km
+  consumption?: number,     // Vehicle fuel consumption in L/100Km
   distanceByYear: number,   // Distance yearly made in Km
   emissionFactor?: number,  // Vihicle emission factor in gCO2e/km
-  fuel: FuelE,              // Emission factor of generated waste from the product
+  fuel?: FuelE,             // Emission factor of generated waste from the product
 }
 
-// Vehicule informations
+// Vehicle informations
 export type ModelT = {
   distanceByYear: number,     // Average distance yearly made in Km
   fuel: FuelE,                // Emission factor of generated waste from the product
@@ -49,5 +49,4 @@ export type FigureT = {
 export type DataI = {
   emissionFactors: {[key: string]: number},
   emissionFigure: FigureT,
-  //yearFactors: {[key: string]: number}
 }

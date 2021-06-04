@@ -3,6 +3,14 @@ import dataJSON from './data/fr.json';
 const data = dataJSON as DataI;
 
 /**
+ * Return the current data constants loaded
+ *
+ * @return constant data loaded
+ */
+export const getData = ():DataI => { return data; }
+
+
+/**
  * Compute a CO2 emission from the consumption in kgCO2e/year using
  * fuel emission factors in kgCO2e/litre
  *
@@ -31,11 +39,11 @@ const data = dataJSON as DataI;
  */
 export const getEmissionConsumed = (consumption:ConsumptionT):number => {
   // We either needs consumption or mileage && MPG
-  if (!consumption.consumption && !consumption.distanceByYear ||
-      !consumption.consumption && !consumption.mpg) return -1;
+  if (consumption.consumption === undefined  && consumption.distanceByYear === undefined ||
+      consumption.consumption === undefined && consumption.mpg === undefined) return -1;
 
   // Retrieve the consumption in L
-  const consumed = consumption.consumption ||
+  const consumed = (consumption.consumption !== undefined) ? consumption.consumption :
                    consumption.mpg! * (consumption.distanceByYear! / 100);
 
   return consumed * data.emissionFactors[consumption.fuel];
@@ -63,20 +71,22 @@ export const getEmissionConsumed = (consumption:ConsumptionT):number => {
  - Emission = MPG * (Mileage / 100) * FuelEmissionFactor * YearCorrection
  - [kgCO2e/year] = [L/100Km] * [100Km/year] * [kgCO2e/L] * Cste
  *
- * @param vehicle - the vehicle measured factors in { gCO2e/km } or { L/100Km } and the Mileage
+ * @param vehicle - the vehicle measured factors in ({ gCO2e/km } or { L/100Km + FuelE }) and the Mileage
  *
  * @return
  *   the estimated emission in kgCO2/year
  *   -1 in case of error (missing information)
  */
 export const getEmissionMileage = (vehicle:VehicleT):number => {
-  if (!vehicle.emissionFactor && !vehicle.consumption) return -1;
-  if (vehicle.consumption) return getEmissionConsumed({
-    consumption: vehicle.consumption, // * yearFactor
-    distanceByYear: vehicle.distanceByYear,
-    fuel: vehicle.fuel
+  // We either needs emissionFactor or consumption && fuel
+  if (vehicle.emissionFactor === undefined  && vehicle.consumption === undefined ||
+      vehicle.emissionFactor === undefined && vehicle.fuel === undefined) return -1;
+  // Return from consumption && fuel
+  if (vehicle.consumption !== undefined ) return getEmissionConsumed({
+    consumption: vehicle.consumption * vehicle.distanceByYear / 100, // * yearFactor
+    fuel: vehicle.fuel!
   })
-
+  // Return from emissionFactor
   return vehicle.distanceByYear * (vehicle.emissionFactor! / 1000);// * yearFactor;
 }
 
@@ -108,11 +118,11 @@ export const getEmissionMileage = (vehicle:VehicleT):number => {
  */
 export const getEmissionEstimated = (model:ModelT):number => {
   const vehicleData = data.emissionFigure.vehicle[model.type][model.fuel];
-  if (vehicleData) return -1;
+  if (!vehicleData) return -1;
 
   const startYear = data.emissionFigure.yearStart;
-  const closestYear = Math.min(Math.max(startYear, model.year), vehicleData[vehicleData!.length - 1]);
-  const emissionFactor = vehicleData[closestYear - startYear]
+  const closestYear = Math.min(Math.max(startYear, model.year), startYear + vehicleData!.length - 1);
+  const emissionFactor = vehicleData[closestYear - startYear];
 
   return model.distanceByYear * (emissionFactor / 1000);
 }
