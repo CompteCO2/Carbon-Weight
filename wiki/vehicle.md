@@ -1,5 +1,5 @@
 # Vehicle Emissions
-The carbon footprint from car usage can be calculated using different methods, providing the result in differing levels of accuracy. We propose two computations :
+The carbon footprint from car usage can be calculated using different methods, providing the result in differing levels of accuracy. We propose three computations :
 - **From Fuel Consumption**: Type of Fuel and, Consumption or Annual Mileage and actual MPG.
 - **From Registration Card**: Type of Fuel, Mileage and original emission factor or consumption factor.
 - **From Vehicle Type**: Annual Mileage and the gCO2e/km figure (explained below).

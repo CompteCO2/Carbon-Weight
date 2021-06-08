@@ -5,65 +5,96 @@
     "H3": 0.6
   },
   "emissionFactors": {
-    "electric": 0.079,
-    "fuelOil": 0.324,
-    "gas": 0.244,
-    "GPL": 0.275,
-    "urban": 0.109,
-    "wood": 0.0295
+    "electric": {
+      "emissionFactor": 0.079,
+      "energyFactor": 0.079
+    },
+    "fuelOil": {
+      "emissionFactor": 0.324,
+      "energyFactor": 3.86
+    },
+
+    "gas": {
+      "emissionFactor": 0.244,
+      "energyFactor": 3.23
+    },
+    "GPL": {
+      "emissionFactor": 0.275,
+      "energyFactor": 3.45
+    },
+    "urban": {
+      "emissionFactor": 0.109,
+      "energyFactor": -1
+    },
+    "wood": {
+      "emissionFactor": 0.0295,
+      "energyFactor": 0.114
+    }
   },
   "consumptionFactors": {
     "old": {
       "apartment": {
         "electric": {
           "emissionFactor": 98,
-          "surface": 49
+          "surface": 49,
+          "part": 16.4
         },
         "fuelOil": {
           "emissionFactor": 172,
-          "surface": 89
+          "surface": 89,
+          "part": 2.55
         },
         "gas": {
           "emissionFactor": 146,
-          "surface": 71
+          "surface": 71,
+          "part": 26.05
         },
         "GPL": {
           "emissionFactor": 101,
-          "surface": 87
+          "surface": 87,
+          "part": 0.05
         },
         "wood": {
           "emissionFactor": 211,
-          "surface": 79
+          "surface": 79,
+          "part": 0.25
         },
         "urban": {
           "emissionFactor": 255,
-          "surface": 71
+          "surface": 71,
+          "part": 4.65
         }
       },
       "house": {
         "electric": {
           "emissionFactor": 150,
-          "surface": 96
+          "surface": 96,
+          "part": 19.35
         },
         "fuelOil": {
           "emissionFactor": 187,
-          "surface": 119
+          "surface": 119,
+          "part": 9.25
         },
         "gas": {
           "emissionFactor": 201,
-          "surface": 105
+          "surface": 105,
+          "part": 16.1
         },
         "GPL": {
           "emissionFactor": 139,
-          "surface": 114
+          "surface": 114,
+          "part": 1.25
         },
         "wood": {
           "emissionFactor": 290,
-          "surface": 106
+          "surface": 106,
+          "part": 3.9
         },
         "urban": {
           "emissionFactor": -1,
-          "surface": -1
+          "surface": -1,
+          "part": 0.2
         }
       }
     },
@@ -71,53 +102,65 @@
       "apartment": {
         "electric": {
           "emissionFactor": 65,
-          "surface": 53
+          "surface": 53,
+          "part": 16.4
         },
         "fuelOil": {
           "emissionFactor": 162,
-          "surface": 88
+          "surface": 88,
+          "part": 2.55
         },
         "gas": {
           "emissionFactor": 125,
-          "surface": 71
+          "surface": 71,
+          "part": 26.05
         },
         "GPL": {
           "emissionFactor": 80,
-          "surface": 86
+          "surface": 86,
+          "part": 0.05
         },
         "wood": {
           "emissionFactor": 172,
-          "surface": 79
+          "surface": 79,
+          "part": 0.25
         },
         "urban": {
           "emissionFactor": 230,
-          "surface": 70
+          "surface": 70,
+          "part": 4.65
         }
       },
       "house": {
         "electric": {
           "emissionFactor": 106,
-          "surface": 110
+          "surface": 110,
+          "part": 19.35
         },
         "fuelOil": {
           "emissionFactor": 171,
-          "surface": 120
+          "surface": 120,
+          "part": 9.25
         },
         "gas": {
           "emissionFactor": 166,
-          "surface": 112
+          "surface": 112,
+          "part": 16.1
         },
         "GPL": {
           "emissionFactor": 129,
-          "surface": 116
+          "surface": 116,
+          "part": 1.25
         },
         "wood": {
           "emissionFactor": 235,
-          "surface": 114
+          "surface": 114,
+          "part": 3.9
         },
         "urban": {
           "emissionFactor": -1,
-          "surface": -1
+          "surface": -1,
+          "part": 0.2
         }
       }
     }
@@ -218,5 +261,9 @@
     "34 - Hérault": "H3",
     "66 - Pyrénées Orientales": "H3",
     "83 - Var": "H3"
+  },
+  "study": {
+    "apartment": 12276500,
+    "house": 16103200
   }
 }

@@ -112,6 +112,11 @@ const REGION_DATA = [
     },
     testDescription: "H3 - Recent House - 100m2"
   },
+  {
+    expectedResult: 693,
+    house : { built: YearE.recent, heater: HeaterE.wood, surface: 100, type: HouseE.house },
+    testDescription: "No Region - No Coeff - Recent House - 100m2"
+  },
 ];
 
 const SURFACE_DATA = [

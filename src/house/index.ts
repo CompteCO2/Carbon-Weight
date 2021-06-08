@@ -1,6 +1,14 @@
-import { ClimateE, DataI, HouseT } from './types';
+import { ClimateE, DataI, HeaterE, HouseE, HouseT, YearE } from './types';
 import dataJSON from './data/fr.json';
 const data = dataJSON as DataI;
+let avgEmission:number|undefined = undefined; // Singleton average computation
+
+/**
+ * Return the current data constants loaded
+ *
+ * @return constant data loaded
+ */
+export const getData = ():DataI => { return data; }
 
 /**
  * Compute the CO2 emissions  estimation for a house in kgCO2e/year
@@ -17,34 +25,82 @@ const data = dataJSON as DataI;
  *   -1 in case of error
  */
 export const getEmission = (house:HouseT):number => {
-  const region = data.regions[house.region];
+  if (house.region && !data.regions[house.region]) return -1;
+
   const consumptionFactor = data.consumptionFactors[house.built][house.type][house.heater].emissionFactor;
+  if (house.surface < 0 || consumptionFactor < 0) return -1;
 
-  if (!region|| house.surface < 0 || consumptionFactor < 0) return -1;
-
-  const climateCoeff = data.climateCoeffs[region as ClimateE];
-  const combustibleFactor = data.emissionFactors[house.heater];
+  const climateCoeff = house.region ? data.climateCoeffs[data.regions[house.region] as ClimateE] : 1;
+  const combustibleFactor = data.emissionFactors[house.heater].emissionFactor;
   return house.surface * consumptionFactor * combustibleFactor * climateCoeff;
 }
 
 /**
- * @TODO Verify units in use for each energy type
+ * Return the average co2 estimation from housing heating in kgCO2e/year.
+ *
+ * @warning
+ * Implementation is defined as a lazy singleton that compute only once.
+ *
+ * @ TODO
+ * Could be more generic
+ *
+ * @return
+ * The estimated co2 emission in kgCO2e/year
+ */
+export const getEmissionAvg = ():number => {
+  if (avgEmission) return avgEmission;
+
+  const apartmentPart = data.study.apartment / (data.study.apartment + data.study.house);
+  const housePart = data.study.house / (data.study.apartment + data.study.house);
+  let apartmentEmission = 0;
+  let houseEmission = 0;
+
+  // Compute Average emissions
+  for (const [keyBuilt, built] of Object.entries(data.consumptionFactors)) {
+    const apartment = built.apartment;
+    const house = built.house;
+
+    // Adding all apartment emissions
+    for (const [keyHeater, heater] of Object.entries(apartment)) {
+      apartmentEmission += (heater.part / 100) *
+        getEmission({ heater: keyHeater as HeaterE, built: keyBuilt as YearE,
+                      surface: heater.surface, type: HouseE.apartment });
+    };
+    // Adding all apartment emissions
+    for (const [keyHeater, heater] of Object.entries(house)) {
+      const emission = (heater.part / 100) *
+        getEmission({ heater: keyHeater as HeaterE, built: keyBuilt as YearE,
+                      surface: heater.surface, type: HouseE.apartment });
+      if (emission > 0) houseEmission += emission;
+    };
+  }
+
+  avgEmission = (apartmentEmission * apartmentPart) + (houseEmission * housePart);
+  return avgEmission;
+}
+
+/**
  * Compute the co2 emission consumed in kgCO2e from a list of consumed ressources
  * Negative values are allowed (this could be due to energy provider correction)
  *
  * @param  consumptions - list consumptions made in unit depending on heater type
  * @param  heater - type of heater in use
  *
- * @return the real emission consummed from bills consumptions in kgCO2e
+ * @return
+ * the real emission consummed from bills consumptions in kgCO2e
+ * -1 in case of error (invalid energy factor from heater)
  */
-/*export const getEmissionConsumed = (consumptions:number[], heater:HeaterE):number => {
+export const getEmissionConsumed = (consumptions:number[], heater:HeaterE):number => {
+  const combustibleFactor = data.emissionFactors[heater].energyFactor;
+  if (combustibleFactor < 0) return -1;
+
   let initialEmission = 0;
   const emissions = consumptions.reduce((acc, value) => acc + value, initialEmission);
-  return emissions * data.emissionFactors[heater];
-}*/
+  return emissions * combustibleFactor;
+}
 
 /**
- * @TODO Source and verify factor coefficient
+ * @TODO Source and verify factor coefficients
  * Compute the co2 emissions reduction from the reduction earned with the work of the house in kgCO2/year
  * Use the emission already computed from house if available, compute first the house emission otherwise.
  *

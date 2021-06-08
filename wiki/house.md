@@ -1,5 +1,13 @@
 # Housing Emissions
-We compute here the CO2e emission estimation from heating housing with this simple computation:
+The carbon footprint from heating usage is proposed with two computations, both extremely simple :
+- **From Real Consumption**: Use the exact consumption of a combustible to compute the CO2 emission in **kgCO2e**.
+- **From House**: Use housing model to compute an estimation of CO2 emission in **kgCO2e/year**.
+
+First method is straight (U is the combustible unit):
+- Emission = Consumption * CombustibleFactor
+- [kgCO2e] = [U] * [kgCO2e/U]
+
+Second one uses a few more factors:
 - Emission = Surface * ConsumptionFactor * CombustibleFactor * ClimateCoef
 - [kgCO2e/year] = [m²] * [kWh/(m².year)] * [kgCO2e/kW] * Cste
 
@@ -37,7 +45,8 @@ The ADEME has used this classification to obtain regional averages from the nati
 Using the ADEME/CEREN source - https://www.bilans-ges.ademe.fr/fr/accueil/documentation-gene/index/page/Chauffage - we compute the nation average co2 emission by normalizing and summing the average emission of each housing from:
 - **Average Emission Factor** - kWh/(m².year)
 - **Average Housing Surfaces** - m²
-- **Average Proportion of each energy in heating** - %
+- **Average Proportion of each energy in heating** - % (equally divided between "new" and "old" housing and grouped by housing type).
+- **Proportion of Apartments & Houses in the study** - %
 
 ## Possible Future Enhancement
 Add a reduction coefficient from the work type a house get from:

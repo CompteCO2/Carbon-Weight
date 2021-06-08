@@ -2,18 +2,18 @@
 import { getData, getEmissionAvg } from '../';
 import { BuildData, FoodE } from '../types';
 
+describe("Testing constants - Make sure data loaded", () => {
+  const data = getData();
+  test("Check data", () => expect(data.foods).toBeDefined());
+  test("Check minimum data fields", () => expect(Object.keys(data.foods).length).toBeGreaterThan(9));
+});
+
 describe("Testing constants - Testing the national average", () => {
   const emissionAvg = getEmissionAvg();
   test("Check national emission", () => expect(emissionAvg.emission).toBeCloseTo(2562.5, 0));
   test("Check national waste", () => expect(emissionAvg.waste).toBeCloseTo(124.5, 0));
   const newEmission = getEmissionAvg();
   test("Check national emission - Singleton", () => expect(newEmission.emission).toBeCloseTo(2562.5, 0));
-});
-
-describe("Testing constants - Make sure data loaded", () => {
-  const data = getData();
-  test("Check data", () => expect(data.foods).toBeDefined());
-  test("Check minimum data fields", () => expect(Object.keys(data.foods).length).toBeGreaterThan(9));
 });
 
 describe("Testing constants build - Make sure data are converted properly", () => {

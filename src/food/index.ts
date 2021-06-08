@@ -13,39 +13,6 @@ let avgEmission:ComsumptionR|undefined = undefined; // Singleton average computa
 export const getData = ():DataI => { return data; }
 
 /**
- * Return the average co2 estimation from eating habits in kgCO2e/year.
- *
- * @description
- * It takes the average adult consumption of different foods expressed in g/day from trusted source.
- * The formulat we use is as simple as (where frequency is given by week) :
- *
- * emission = SUM[(dailyAvg * 365) / 1000 * carbonEmissionFactor]
- * [kgCO2e/year] = (365[g/day]) / 1000 * [kgCO2e/kg]
- *
- * waste = SUM[(daily * 365) / 1000 * wasteRatioFactor * wasteEmissionFactor]
- * [kgCO2e/year] = (365[g/day]) / 1000 * [kgPackaging/kg] * [kgCO2e/kgPackaging]
- *
- * @warning
- * Implementation is defined as a lazy singleton that compute only once.
- *
- * @return
- * The estimated co2 emission in kgCO2e/year
- */
-export const getEmissionAvg = ():ComsumptionR => {
-  if (avgEmission) return { emission:avgEmission.emission, waste:avgEmission.waste }
-  let emission = 0;
-  let waste = 0;
-  for (const value of Object.values(data.foods)) {
-    const yearlyWeight = value.averageWeightDay * 365 / 1000; // (from g to Kg)
-    emission += yearlyWeight * value.emissionFactor;
-    waste += yearlyWeight * value.wasteRatioFactor * value.wasteEmissionFactor;
-  }
-  avgEmission = { emission, waste }
-
-  return avgEmission;
-}
-
-/**
  * Compute a rough co2 estimation from eating habits in kgCO2e/year
  *
  * @description
@@ -79,4 +46,37 @@ export const getEmission = (consumption:ConsumptionT):ComsumptionR => {
   }
 
   return { emission, waste };
+}
+
+/**
+ * Return the average co2 estimation from eating habits in kgCO2e/year.
+ *
+ * @description
+ * It takes the average adult consumption of different foods expressed in g/day from trusted source.
+ * The formulat we use is as simple as (where frequency is given by week) :
+ *
+ * emission = SUM[(dailyAvg * 365) / 1000 * carbonEmissionFactor]
+ * [kgCO2e/year] = (365[g/day]) / 1000 * [kgCO2e/kg]
+ *
+ * waste = SUM[(daily * 365) / 1000 * wasteRatioFactor * wasteEmissionFactor]
+ * [kgCO2e/year] = (365[g/day]) / 1000 * [kgPackaging/kg] * [kgCO2e/kgPackaging]
+ *
+ * @warning
+ * Implementation is defined as a lazy singleton that compute only once.
+ *
+ * @return
+ * The estimated co2 emission in kgCO2e/year
+ */
+export const getEmissionAvg = ():ComsumptionR => {
+  if (avgEmission) return { emission:avgEmission.emission, waste:avgEmission.waste };
+  let emission = 0;
+  let waste = 0;
+  for (const value of Object.values(data.foods)) {
+    const yearlyWeight = value.averageWeightDay * 365 / 1000; // (from g to Kg)
+    emission += yearlyWeight * value.emissionFactor;
+    waste += yearlyWeight * value.wasteRatioFactor * value.wasteEmissionFactor;
+  }
+  avgEmission = { emission, waste }
+
+  return avgEmission;
 }

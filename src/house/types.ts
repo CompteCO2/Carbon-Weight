@@ -7,12 +7,12 @@ export enum ClimateE {
 
 // Heater Combustible types available
 export enum HeaterE {
-  urban = "urban",        // District Heating
-  electric = "electric",  // Electric
-  gas = "gas",            // Domestic Gas
-  GPL = "GPL",            // GPL (Propane-Butane)
-  fuelOil = "fuelOil",    // Domestic Fuel Oil
-  wood = "wood",          // Firewood / Coal
+  urban = "urban",        // District Heating - ?
+  electric = "electric",  // Electric - KWh
+  gas = "gas",            // Domestic Gas - Kg
+  GPL = "GPL",            // GPL (Propane-Butane) - Kg
+  fuelOil = "fuelOil",    // Domestic Fuel Oil - L
+  wood = "wood",          // Firewood / Coal - Kg
 }
 
 // House types available
@@ -29,8 +29,15 @@ export enum YearE {
 
 // Heater factors average informations
 export type ConsumptionI = {
-  emissionFactor: number,
-  surface: number
+  emissionFactor: number, // kWh/(m².year)
+  part: number,           // Part of use in %
+  surface: number         // m²
+}
+
+// Combustible factors informations
+export type HeaterI = {
+  emissionFactor: number, // kWh/(m².year)
+  energyFactor: number    // kgCO2e/U (combustible unit)
 }
 
 // House informations
@@ -38,22 +45,23 @@ export type HouseT = {
   emission?: number, // estimated house emissions in kgCO2/year
   heater: HeaterE,   // heater type
   built: YearE,      // Whether the house was built before 1975 (included) or not
-  region: string,    // region of the house
+  region?: string,   // region of the house
   surface: number,   // habitable surface of the house in m2
   type: HouseE,      // Housing type
 }
 
-// Mapping class
-export type ClasseI = {[key: string]: number};
-
 // Interface of data factors used to compute emission
 export type DataI = {
   climateCoeffs: {[key in keyof typeof ClimateE]: number},   // Coeff
-  emissionFactors: {[key in keyof typeof HeaterE]: number}, // kgCO2e/kWh
+  emissionFactors: {[key in keyof typeof HeaterE]: HeaterI}, // kgCO2e/kWh
   consumptionFactors: {
     [key in keyof typeof YearE]: {
       [key in keyof typeof HouseE]: {
         [key in keyof typeof HeaterE]: ConsumptionI
   }}},
-  regions: {[key: string]: ClimateE}
+  regions: {[key: string]: ClimateE},
+  study: {
+    apartment: number,
+    house: number
+  }
 }
