@@ -1,4 +1,4 @@
-import { getWorkReduction } from "../";
+/*import { getWorkReduction } from "../";
 import { HeaterT, HouseT, ReductionT } from "../types";
 
 // Data interface used for testing purpose
@@ -92,4 +92,4 @@ const TEST_DATA = [
 ];
 
 describe("Testing work reduction emission using wrong parameters", () => runner(WRONG_DATA));
-describe("Testing few work reduction emission", () => runner(TEST_DATA));
+describe("Testing few work reduction emission", () => runner(TEST_DATA));*/

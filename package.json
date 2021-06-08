@@ -37,7 +37,7 @@
   ],
   "scripts": {
     "build": "npm run lint && tsc && npm run test",
-    "build-all": "npm run lint && tsc && npm run test && npm run docs",
+    "build:release": "npm run lint && tsc && npm run test && bash <(curl -s https://codecov.io/bash) && npm run docs",
     "docs": "typedoc",
     "lint": "eslint -c .eslintrc.json",
     "test": "jest  --env=node --colors --coverage test"

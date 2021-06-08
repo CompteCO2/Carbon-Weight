@@ -10,6 +10,6 @@ jobs:
   include:
     - stage: release
       scripts:
-        - npm install codecov -g
+        - yarn test
       after_success:
-        - codecov
+        - bash <(curl -s https://codecov.io/bash)

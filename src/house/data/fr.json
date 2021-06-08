@@ -1,185 +1,222 @@
 {
-  "heaters": {
-    "ELE": {
-      "unit": "kWh",
-      "emissionFactor": 0,
-      "energyFactor": 0
+  "climateCoeffs": {
+    "H1": 1.1,
+    "H2": 0.9,
+    "H3": 0.6
+  },
+  "emissionFactors": {
+    "electric": 0.079,
+    "fuelOil": 0.324,
+    "gas": 0.244,
+    "GPL": 0.275,
+    "urban": 0.109,
+    "wood": 0.0295
+  },
+  "consumptionFactors": {
+    "old": {
+      "apartment": {
+        "electric": {
+          "emissionFactor": 98,
+          "surface": 49
+        },
+        "fuelOil": {
+          "emissionFactor": 172,
+          "surface": 89
+        },
+        "gas": {
+          "emissionFactor": 146,
+          "surface": 71
+        },
+        "GPL": {
+          "emissionFactor": 101,
+          "surface": 87
+        },
+        "wood": {
+          "emissionFactor": 211,
+          "surface": 79
+        },
+        "urban": {
+          "emissionFactor": 255,
+          "surface": 71
+        }
+      },
+      "house": {
+        "electric": {
+          "emissionFactor": 150,
+          "surface": 96
+        },
+        "fuelOil": {
+          "emissionFactor": 187,
+          "surface": 119
+        },
+        "gas": {
+          "emissionFactor": 201,
+          "surface": 105
+        },
+        "GPL": {
+          "emissionFactor": 139,
+          "surface": 114
+        },
+        "wood": {
+          "emissionFactor": 290,
+          "surface": 106
+        },
+        "urban": {
+          "emissionFactor": -1,
+          "surface": -1
+        }
+      }
     },
-    "GAS": {
-      "unit": "kWh",
-      "emissionFactor": 0.187,
-      "energyFactor": 1.110
-    },
-    "MIN": {
-      "unit": "kg",
-      "emissionFactor": 2.5,
-      "energyFactor": 0.183
-    },
-    "OIL": {
-      "unit": "L",
-      "emissionFactor": 2.68,
-      "energyFactor": 0.110
-    },
-    "WOO": {
-      "unit": "stere",
-      "emissionFactor": 0,
-      "energyFactor": 0
-    },
-    "HPU": {
-      "unit": "kWh",
-      "emissionFactor": 0,
-      "energyFactor": 0.333
-    },
-    "HEA": {
-      "unit": "kg",
-      "emissionFactor": 0.056,
-      "energyFactor": 0.002
-    },
-    "PET": {
-      "unit": "L",
-      "emissionFactor": 2.57,
-      "energyFactor": 0
-    },
-    "CIT": {
-      "unit": "kg",
-      "emissionFactor": 2.980,
-      "energyFactor": 0.085
-    },
-    "BUT": {
-      "unit": "kg",
-      "emissionFactor": 2.980,
-      "energyFactor": 0.085
+    "recent": {
+      "apartment": {
+        "electric": {
+          "emissionFactor": 65,
+          "surface": 53
+        },
+        "fuelOil": {
+          "emissionFactor": 162,
+          "surface": 88
+        },
+        "gas": {
+          "emissionFactor": 125,
+          "surface": 71
+        },
+        "GPL": {
+          "emissionFactor": 80,
+          "surface": 86
+        },
+        "wood": {
+          "emissionFactor": 172,
+          "surface": 79
+        },
+        "urban": {
+          "emissionFactor": 230,
+          "surface": 70
+        }
+      },
+      "house": {
+        "electric": {
+          "emissionFactor": 106,
+          "surface": 110
+        },
+        "fuelOil": {
+          "emissionFactor": 171,
+          "surface": 120
+        },
+        "gas": {
+          "emissionFactor": 166,
+          "surface": 112
+        },
+        "GPL": {
+          "emissionFactor": 129,
+          "surface": 116
+        },
+        "wood": {
+          "emissionFactor": 235,
+          "surface": 114
+        },
+        "urban": {
+          "emissionFactor": -1,
+          "surface": -1
+        }
+      }
     }
   },
-  "classes": {
-    "H1": {
-      "0": 250,
-      "1975": 200,
-      "1978": 180,
-      "1983": 150,
-      "1989": 120,
-      "2001": 100
-    },
-    "H2": {
-      "0": 212.5,
-      "1975": 170,
-      "1978": 153,
-      "1983": 127.5,
-      "1989": 102,
-      "2001": 85
-    },
-    "H3": {
-      "0": 175,
-      "1975": 140,
-      "1978": 126,
-      "1983": 105,
-      "1989": 84,
-      "2001": 70
-    }
-  },
-  "climates": {
-    "1": "H1",
-    "2": "H1",
-    "3": "H1",
-    "4": "H1",
-    "5": "H1",
-    "6": "H3",
-    "7": "H1",
-    "8": "H1",
-    "9": "H1",
-    "10": "H1",
-    "11": "H3",
-    "12": "H1",
-    "13": "H3",
-    "14": "H1",
-    "15": "H1",
-    "16": "H2",
-    "17": "H2",
-    "18": "H2",
-    "19": "H1",
-    "20": "H3",
-    "21": "H1",
-    "22": "H2",
-    "23": "H1",
-    "24": "H2",
-    "25": "H1",
-    "26": "H2",
-    "27": "H1",
-    "28": "H1",
-    "29": "H2",
-    "30": "H3",
-    "31": "H2",
-    "32": "H2",
-    "33": "H2",
-    "34": "H3",
-    "35": "H2",
-    "36": "H1",
-    "37": "H2",
-    "38": "H1",
-    "39": "H1",
-    "40": "H2",
-    "41": "H2",
-    "42": "H1",
-    "43": "H1",
-    "44": "H2",
-    "45": "H1",
-    "46": "H2",
-    "47": "H2",
-    "48": "H1",
-    "49": "H2",
-    "50": "H2",
-    "51": "H1",
-    "52": "H1",
-    "53": "H2",
-    "54": "H1",
-    "55": "H1",
-    "56": "H2",
-    "57": "H1",
-    "58": "H1",
-    "59": "H1",
-    "60": "H1",
-    "61": "H1",
-    "62": "H1",
-    "63": "H1",
-    "64": "H2",
-    "65": "H2",
-    "66": "H3",
-    "67": "H1",
-    "68": "H1",
-    "69": "H1",
-    "70": "H1",
-    "71": "H1",
-    "72": "H2",
-    "73": "H1",
-    "74": "H1",
-    "75": "H1",
-    "76": "H1",
-    "77": "H1",
-    "78": "H1",
-    "79": "H2",
-    "80": "H1",
-    "81": "H2",
-    "82": "H2",
-    "83": "H3",
-    "84": "H2",
-    "85": "H2",
-    "86": "H2",
-    "87": "H1",
-    "88": "H1",
-    "89": "H1",
-    "90": "H1",
-    "91": "H1",
-    "92": "H1",
-    "93": "H1",
-    "94": "H1",
-    "95": "H1"
-  },
-  "reductions": {
-    "ATTIC_INSULATION": 0.2,
-    "WALL_INSULATION": 0.25,
-    "WINDOW_CHANGE": 0.15,
-    "FLOOR_INSULATION": 0.1,
-    "VENTILATION_UPDATE": 0.1,
-    "OTHER": 0.1
+  "regions": {
+    "01 - Ain": "H1",
+    "02 - Aisne": "H1",
+    "03 - Allier": "H1",
+    "05 - Hautes Alpes": "H1",
+    "08 - Ardennes": "H1",
+    "10 - Aube": "H1",
+    "14 - Calvados": "H1",
+    "15 - Cantal": "H1",
+    "19 - Corrèze": "H1",
+    "21 - Cote d’or": "H1",
+    "23 - Creuse": "H1",
+    "25 - Doubs": "H1",
+    "27 - Eure": "H1",
+    "28 - Eure et Loir": "H1",
+    "38 - Isère": "H1",
+    "39 - Jura": "H1",
+    "42 - Loire": "H1",
+    "43 - Haute Loire": "H1",
+    "45 - Loiret": "H1",
+    "51 - Marne": "H1",
+    "52 - Haute Marne": "H1",
+    "54 - Meurthe et Moselle": "H1",
+    "55 - Meuse": "H1",
+    "57 - Moselle": "H1",
+    "58 - Nièvre": "H1",
+    "59 - Nord": "H1",
+    "60 - Oise": "H1",
+    "61 - Orne": "H1",
+    "62 - Pas de Calais": "H1",
+    "63 - Puy de Dôme": "H1",
+    "67 - Bas Rhin": "H1",
+    "68 - Haut Rhin": "H1",
+    "69 - Rhône": "H1",
+    "70 - Haute Saône": "H1",
+    "71 - Saône et Loire": "H1",
+    "73 - Savoie": "H1",
+    "74 - Haute Savoie": "H1",
+    "75 - Paris": "H1",
+    "76 - Seine Maritime": "H1",
+    "77 - Seine et Marne": "H1",
+    "78 - Yvelines": "H1",
+    "80 - Somme": "H1",
+    "87 - Haute Vienne": "H1",
+    "88 - Vosges": "H1",
+    "89 - Yonne": "H1",
+    "90 - Territoire de Belfort": "H1",
+    "91 - Essonne": "H1",
+    "92 - Hauts de Seine": "H1",
+    "93 - Seine Saint Denis": "H1",
+    "94 - Val de Marne": "H1",
+    "95 - Val d’Oise": "H1",
+    "04 - Alpes de Haute Provence": "H2",
+    "07 - Ardèche": "H2",
+    "09 - Ariège": "H2",
+    "12 - Aveyron": "H2",
+    "16 - Charente": "H2",
+    "17 - Charente Maritime": "H2",
+    "18 - Cher": "H2",
+    "22 - Cotes d’Armor": "H2",
+    "24 - Dordogne": "H2",
+    "26 - Drome": "H2",
+    "29 - Finistère": "H2",
+    "31 - Haute Garonne": "H2",
+    "32 - Gers": "H2",
+    "33 - Gironde": "H2",
+    "35 - Ile et Vilaine": "H2",
+    "36 - Indre": "H2",
+    "37 - Indre et Loire": "H2",
+    "40 - Landes": "H2",
+    "41 - Loir et Cher": "H2",
+    "44 - Loire Atlantique": "H2",
+    "46 - Lot": "H2",
+    "47 - Lot et Garonne": "H2",
+    "48 - Lozère": "H2",
+    "49 - Maine et Loire": "H2",
+    "50 - Manche": "H2",
+    "53 - Mayenne": "H2",
+    "56 - Morbihan": "H2",
+    "64 - Pyrénées Atlantiques": "H2",
+    "65 - Hautes Pyrénées": "H2",
+    "72 - Sarthe": "H2",
+    "79 - Deux Sèvres": "H2",
+    "81 - Tarn": "H2",
+    "82 - Tarn et Garonne": "H2",
+    "84 - Vaucluse": "H2",
+    "85 - Vendée": "H2",
+    "86 - Vienne": "H2",
+    "06 - Alpes Maritimes": "H3",
+    "11 - Aude": "H3",
+    "13 - Bouches Du Rhône": "H3",
+    "20 - Corse": "H3",
+    "30 - Gard": "H3",
+    "34 - Hérault": "H3",
+    "66 - Pyrénées Orientales": "H3",
+    "83 - Var": "H3"
   }
 }

@@ -5,15 +5,15 @@
 [![Build Status](https://travis-ci.org/CompteCO2/Carbon-Weight.svg?branch=main)](https://travis-ci.org/CompteCO2/Carbon-Weight)
 
 # Carbon-Weight
-Carbon Footprint Calculator For Individuals And Households. This carbon footprint calculation allows you to estimate and calculate your personal or business carbon footprint whether it comes from **housing, travels, transportation or food habits** (made by https://www.compteco2.com/).
+Carbon Footprint Calculator For Individuals And Households. This carbon footprint calculation allows you to estimate and calculate your personal or business carbon footprint whether it comes from **housing, travels, transportation or food habits** (made by https://www.compteco2.com/). It has been designed to be integrated for a final user ease of use.
 
-You may directly use this calculator online from https://myco2emission.com/ (WIP).
+You may directly use this calculator online from https://myco2emission.com/ (Update In Progress).
 
 | ![](wiki/screen_01.png) | ![](wiki/screen_02.png) | ![](wiki/screen_04.png) | ![](wiki/screen_03.png)
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
 
 
-You may embed the calculator to your webpage or blog post using the following HTML code (WIP):
+You may embed the calculator to your webpage or blog post using the following HTML code (Work In Progress):
 ```
 <iframe width="900" height="600" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" src="https://compteco2.com/carbon-weight"></iframe>
 ```
@@ -34,13 +34,21 @@ Node.js >= 12 (tip: use nvm or n to manage multiple Node versions)
 ```
 nvm use # Check supported version
 npm i
-npm run build-all
+npm run build
 ```
 
-This will:
 - Run the linter.
 - Build the source code.
-- Run the unit tests and display coverages.
+- Run the unit tests - display coverages.
+
+**Release**
+```
+npm run build:release
+```
+- Run the linter.
+- Build the source code.
+- Run the unit tests - display coverages.
+- Upload coverages.
 - Generate the documentation as interactive HTML pages (typedoc).
 
 # Methodology & Data
@@ -73,6 +81,11 @@ Want more insight about the factors in use ? Here is the wiki page dedicated:
 ### [Food Emissions Factors](/wiki/food.md)
 
 ## House Emissions
+We compute here the CO2e emission estimation from heating housing with this simple computation:
+- Emission = Surface * ConsumptionFactor * CombustibleFactor * ClimateCoef
+- [kgCO2e/year] = [m²] * [kWh/(m².year)] * [kgCO2e/kW] * Cste
+
+We use the last version of the carbon base data (2021) from he French Agency for Ecological Transition (ADEME).
 
 Want more insight about the classifications and factors in use ? Here is the wiki page dedicated:
 ### [House Emissions Factors](/wiki/house.md)

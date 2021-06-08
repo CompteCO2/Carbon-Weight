@@ -1,69 +1,50 @@
-import { DataI, HeaterT, HouseT, ReductionT } from './types';
+import { ClimateE, DataI, HouseT } from './types';
 import dataJSON from './data/fr.json';
 const data = dataJSON as DataI;
 
 /**
- * Retrieve the year key category from the exact building year of the house
+ * Compute the CO2 emissions  estimation for a house in kgCO2e/year
  *
- * @param climate - habitable surface of the house in m2
- * @param buildYear - the year the house was built
- *
- * @return
- *   the year key corresponding to the building year category
- *   undefined in case of unfound category
- */
-export const toYearKey = (climate:string, buildYear:number):string | undefined => {
-  let yearKey = undefined;
-  if (!climate || !data.classes[climate]) return yearKey;
-
-  // Sort years key by descending order to find the corresponding year key
-  const keys = Object.keys(data.classes[climate]).sort((a:string, b:string) => b.localeCompare(a));
-  for (let i = 0; i < keys.length; i++) {
-    if (buildYear >= parseInt(keys[i])) {
-      yearKey = keys[i];
-      break;
-    }
-  }
-
-  return yearKey;
-}
-
-/**
- * Compute the co2 emissions for a house in kgCO2/year
+ * @description
+ * We compute here the CO2e emission estimation from heating housing with this simple computation:
+ * - Emission = Surface * ConsumptionFactor * CombustibleFactor * ClimateCoef
+ * - [kgCO2e/year] = [m²] * [kWh/(m².year)] * [kgCO2e/kW] * Cste
  *
  * @param house - the house
  *
  * @return
- *   the estimated house emissions in kgCO2/year
+ *   the estimated house emissions in kgCO2e/year
  *   -1 in case of error
  */
 export const getEmission = (house:HouseT):number => {
-  const climate = data.climates[house.region];
-  const buildYearKey = toYearKey(climate, house.buildYear);
-  if (!data.climates[house.region] || !buildYearKey || house.surface < 0) return -1;
+  const region = data.regions[house.region];
+  const consumptionFactor = data.consumptionFactors[house.built][house.type][house.heater].emissionFactor;
 
-  const energyFactor = data.classes[climate][buildYearKey];
-  const emissionFactor = data.heaters[house.heater].emissionFactor;
-  const emissionFactorUnit = data.heaters[house.heater].energyFactor;
-  return house.surface * energyFactor * emissionFactor * emissionFactorUnit;
+  if (!region|| house.surface < 0 || consumptionFactor < 0) return -1;
+
+  const climateCoeff = data.climateCoeffs[region as ClimateE];
+  const combustibleFactor = data.emissionFactors[house.heater];
+  return house.surface * consumptionFactor * combustibleFactor * climateCoeff;
 }
 
 /**
- * Compute the co2 emission consumed in kgCO2 from a list of consumed ressources
+ * @TODO Verify units in use for each energy type
+ * Compute the co2 emission consumed in kgCO2e from a list of consumed ressources
  * Negative values are allowed (this could be due to energy provider correction)
  *
  * @param  consumptions - list consumptions made in unit depending on heater type
  * @param  heater - type of heater in use
  *
- * @return the real emission consummed from bills consumptions
+ * @return the real emission consummed from bills consumptions in kgCO2e
  */
-export const getEmissionConsumed = (consumptions:number[], heater:HeaterT):number => {
+/*export const getEmissionConsumed = (consumptions:number[], heater:HeaterE):number => {
   let initialEmission = 0;
   const emissions = consumptions.reduce((acc, value) => acc + value, initialEmission);
-  return emissions * data.heaters[heater].energyFactor;
-}
+  return emissions * data.emissionFactors[heater];
+}*/
 
 /**
+ * @TODO Source and verify factor coefficient
  * Compute the co2 emissions reduction from the reduction earned with the work of the house in kgCO2/year
  * Use the emission already computed from house if available, compute first the house emission otherwise.
  *
@@ -74,7 +55,7 @@ export const getEmissionConsumed = (consumptions:number[], heater:HeaterT):numbe
  *   the estimated emissions reduction in kgCO2/year
  *   -1 in case of error
  */
-export const getWorkReduction = (house:HouseT, works:ReductionT[]):number => {
+/*export const getWorkReduction = (house:HouseT, works:ReductionT[]):number => {
   const emission = house.emission || getEmission(house);
   if (emission < 0) return -1;
 
@@ -84,4 +65,4 @@ export const getWorkReduction = (house:HouseT, works:ReductionT[]):number => {
     [... new Set(works)].reduce((acc, value) => acc + data.reductions[value], initialFactor);
 
   return emission * reductionFactor;
-}
+}*/

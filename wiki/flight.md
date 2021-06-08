@@ -8,7 +8,7 @@ Then we can use the factor emission (cf. next section) to get our first estimati
 Finally, we add a factor depending on the class of the seat taken (economy class, business class, first class). Connections are not taken into account.
 
 ## Emission Factors
-We use the last version of the carbon base data (Mars 2021) from he French Agency for Ecological Transition (ADEME) which uses an emission factor expressed in **kgCO2e/peq.km** (peq = person equivalent):
+We use the last version of the carbon base data (2021) from he French Agency for Ecological Transition (ADEME) which uses an emission factor expressed in **kgCO2e/peq.km** (peq = person equivalent):
 - **Short-Haul**: 0.141
 - **Medium-Haul**: 0.102
 - **Long-Haul**: 0.083
