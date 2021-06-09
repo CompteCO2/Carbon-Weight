@@ -8,18 +8,12 @@
 # Carbon-Weight
 Carbon Footprint Calculator For Individuals And Households. This carbon footprint calculation allows you to estimate and calculate your personal or business carbon footprint whether it comes from **housing, travels, transportation or food habits** (made by https://www.compteco2.com/). It has been designed to be integrated for a final user ease of use.
 
-You may directly use this calculator online from https://myco2emission.com/ (Update In Progress).
+You may directly use this calculator online from https://myco2emission.com/ (Data Update In Progress).
 
 | ![](wiki/screen_01.png) | ![](wiki/screen_02.png) | ![](wiki/screen_04.png) | ![](wiki/screen_03.png)
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
 
-
-You may embed the calculator to your webpage or blog post using the following HTML code (Work In Progress):
-```
-<iframe width="900" height="600" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" src="https://compteco2.com/carbon-weight"></iframe>
-```
-
-You may also install the self contained npm package to use it from your own projects (WIP).
+You may also install the self contained npm package to use it from your own projects:
 ```
 npm i @cco2/carbon-weight
 ```
