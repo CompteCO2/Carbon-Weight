@@ -1,8 +1,8 @@
 {
-  "name": "carbon-weight",
-  "version": "0.0.1",
+  "name": "@cco2/carbon-weight",
+  "version": "1.0.0",
   "description": "Carbon Footprint Calculator For Individuals And Households",
-  "author": "Michael Jeulin-Lagarrigue",
+  "author": "Michael Jeulin-Lagarrigue <michael.jeulinl@gmail.com>",
   "license": "MIT",
   "keywords": [
     "carbon",
@@ -11,10 +11,12 @@
     "co2",
     "compte-co2"
   ],
+  "homepage": "https://github.com/CompteCO2/Carbon-Weight",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CompteCO2/Carbon-Weight"
   },
+  "private": false,
   "main": "src/index.ts",
   "engines": {
     "node": ">= 12.0.0"
@@ -37,7 +39,7 @@
   ],
   "scripts": {
     "build": "npm run lint && tsc && npm run test",
-    "build:release": "npm run lint && tsc && npm run test && bash <(curl -s https://codecov.io/bash) && npm run docs",
+    "build:release": "npm run lint && tsc && npm run test && npm run docs",
     "docs": "typedoc",
     "lint": "eslint -c .eslintrc.json",
     "test": "jest  --env=node --colors --coverage test"

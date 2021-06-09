@@ -54,7 +54,7 @@ Or it could either consumption factor expressed in **L/100Km**. We find back the
 Note: On our side we use the "mix driving condition" measure.
 
 ### Aging Factor
-TODO - Complete review of constant computations.
+TODO - Complete review of constant computations (neutral for now).
 
 ## Car Type - gCO2e/km figure
 The unit is **gCO2e/km** and are statistic averages depending on the three following parameters:
