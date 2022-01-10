@@ -3,7 +3,6 @@
     "allowJs": true,
     "baseUrl": ".",
     "declaration": true,
-    "declarationDir": "dist/types",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "lib": ["es2019"],
