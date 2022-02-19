@@ -1,14 +1,16 @@
-import { ClimateE, DataI, HeaterE, HouseE, HouseT, YearE } from './types';
-import dataJSON from './data/fr.json';
+import { DataI, HeaterE, HouseE, HouseT, YearE } from "./types";
+import dataJSON from "./data/fr.json";
 const data = dataJSON as DataI;
-let avgEmission:number|undefined = undefined; // Singleton average computation
+let avgEmission: number | undefined = undefined; // Singleton average computation
 
 /**
  * Return the current data constants loaded
  *
  * @return constant data loaded
  */
-export const getData = ():DataI => { return data; }
+export const getData = (): DataI => {
+  return data;
+};
 
 /**
  * Compute the CO2 emissions  estimation for a house in kgCO2e/year
@@ -24,16 +26,19 @@ export const getData = ():DataI => { return data; }
  *   the estimated house emissions in kgCO2e/year
  *   -1 in case of error
  */
-export const getEmission = (house:HouseT):number => {
-  if (house.region && !data.regions[house.region]) return -1;
+export const getEmission = (house: HouseT): number => {
+  const region = data.regions.find(region => region.DEP === house.region);
+  if (house.region && !region) return -1; // Region does not exist
 
-  const consumptionFactor = data.consumptionFactors[house.built][house.type][house.heater].emissionFactor;
+  const consumptionFactor =
+    data.consumptionFactors[house.built][house.type][house.heater]
+      .emissionFactor;
   if (house.surface < 0 || consumptionFactor < 0) return -1;
 
-  const climateCoeff = house.region ? data.climateCoeffs[data.regions[house.region] as ClimateE] : 1;
+  const climateCoeff = region ? data.climateCoeffs[region.FACTOR] : 1;
   const combustibleFactor = data.emissionFactors[house.heater].emissionFactor;
   return house.surface * consumptionFactor * combustibleFactor * climateCoeff;
-}
+};
 
 /**
  * Return the average co2 estimation from housing heating in kgCO2e/year.
@@ -47,11 +52,13 @@ export const getEmission = (house:HouseT):number => {
  * @return
  * The estimated co2 emission in kgCO2e/year
  */
-export const getEmissionAvg = ():number => {
+export const getEmissionAvg = (): number => {
   if (avgEmission) return avgEmission;
 
-  const apartmentPart = data.study.apartment / (data.study.apartment + data.study.house);
-  const housePart = data.study.house / (data.study.apartment + data.study.house);
+  const apartmentPart =
+    data.study.apartment / (data.study.apartment + data.study.house);
+  const housePart =
+    data.study.house / (data.study.apartment + data.study.house);
   let apartmentEmission = 0;
   let houseEmission = 0;
 
@@ -62,22 +69,32 @@ export const getEmissionAvg = ():number => {
 
     // Adding all apartment emissions
     for (const [keyHeater, heater] of Object.entries(apartment)) {
-      apartmentEmission += (heater.part / 100) *
-        getEmission({ heater: keyHeater as HeaterE, built: keyBuilt as YearE,
-                      surface: heater.surface, type: HouseE.apartment });
-    };
+      apartmentEmission +=
+        (heater.part / 100) *
+        getEmission({
+          heater: keyHeater as HeaterE,
+          built: keyBuilt as YearE,
+          surface: heater.surface,
+          type: HouseE.apartment
+        });
+    }
     // Adding all apartment emissions
     for (const [keyHeater, heater] of Object.entries(house)) {
-      const emission = (heater.part / 100) *
-        getEmission({ heater: keyHeater as HeaterE, built: keyBuilt as YearE,
-                      surface: heater.surface, type: HouseE.apartment });
+      const emission =
+        (heater.part / 100) *
+        getEmission({
+          heater: keyHeater as HeaterE,
+          built: keyBuilt as YearE,
+          surface: heater.surface,
+          type: HouseE.apartment
+        });
       if (emission > 0) houseEmission += emission;
-    };
+    }
   }
 
-  avgEmission = (apartmentEmission * apartmentPart) + (houseEmission * housePart);
+  avgEmission = apartmentEmission * apartmentPart + houseEmission * housePart;
   return avgEmission;
-}
+};
 
 /**
  * Compute the co2 emission consumed in kgCO2e from a list of consumed ressources
@@ -90,14 +107,20 @@ export const getEmissionAvg = ():number => {
  * the real emission consummed from bills consumptions in kgCO2e
  * -1 in case of error (invalid energy factor from heater)
  */
-export const getEmissionConsumed = (consumptions:number[], heater:HeaterE):number => {
+export const getEmissionConsumed = (
+  consumptions: number[],
+  heater: HeaterE
+): number => {
   const combustibleFactor = data.emissionFactors[heater].energyFactor;
   if (combustibleFactor < 0) return -1;
 
   let initialEmission = 0;
-  const emissions = consumptions.reduce((acc, value) => acc + value, initialEmission);
+  const emissions = consumptions.reduce(
+    (acc, value) => acc + value,
+    initialEmission
+  );
   return emissions * combustibleFactor;
-}
+};
 
 /**
  * @TODO Source and verify factor coefficients

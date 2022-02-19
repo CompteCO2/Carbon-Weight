@@ -14,7 +14,7 @@ export enum HeaterE {
   GPL = "GPL", // GPL (Propane-Butane) - Kg
   heatPump = "heatPump", // Heat Pump (electric)
   thermalSolar = "thermalSolar", // Thermal Solar (electric)
-  propane = "Propane", // Propane - Kg
+  //  propane = "Propane", // Propane - Kg
   wood = "wood" // Firewood / Coal - Kg
 }
 
@@ -43,12 +43,19 @@ export type HeaterI = {
   energyFactor: number; // kgCO2e/U (combustible unit)
 };
 
+// Region factors informations
+export type RegionI = {
+  DEP: number; // Region number
+  NCC: string; // Region name
+  FACTOR: ClimateE; // Region climate factor
+};
+
 // House informations
 export type HouseT = {
   emission?: number; // estimated house emissions in kgCO2/year
   heater: HeaterE; // heater type
   built: YearE; // Whether the house was built before 1975 (included) or not
-  region?: string; // region of the house
+  region?: number; // region of the house
   surface: number; // habitable surface of the house in m2
   type: HouseE; // Housing type
 };
@@ -64,7 +71,7 @@ export type DataI = {
       };
     };
   };
-  regions: { [key: string]: ClimateE };
+  regions: [RegionI];
   study: {
     apartment: number;
     house: number;
