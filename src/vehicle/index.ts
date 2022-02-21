@@ -1,14 +1,16 @@
-import { ConsumptionT, DataI, ModelT, VehicleT } from './types';
-import dataJSON from './data/fr.json';
+import { ConsumptionT, DataI, ModelT, VehicleT } from "./types";
+import dataJSON from "./data/fr.json";
 const data = dataJSON as DataI;
+let avgEmission: number | undefined = undefined; // Singleton average computation
 
 /**
  * Return the current data constants loaded
  *
  * @return constant data loaded
  */
-export const getData = ():DataI => { return data; }
-
+export const getData = (): DataI => {
+  return data;
+};
 
 /**
  * Compute a CO2 emission from the consumption in kgCO2e/year using
@@ -37,17 +39,23 @@ export const getData = ():DataI => { return data; }
  *   the emission in kgCO2/year
  *   -1 in case of error (missing information)
  */
-export const getEmissionConsumed = (consumption:ConsumptionT):number => {
+export const getEmissionConsumed = (consumption: ConsumptionT): number => {
   // We either needs consumption or mileage && MPG
-  if (consumption.consumption === undefined  && consumption.distanceByYear === undefined ||
-      consumption.consumption === undefined && consumption.mpg === undefined) return -1;
+  if (
+    (consumption.consumption === undefined &&
+      consumption.distanceByYear === undefined) ||
+    (consumption.consumption === undefined && consumption.mpg === undefined)
+  )
+    return -1;
 
   // Retrieve the consumption in L
-  const consumed = (consumption.consumption !== undefined) ? consumption.consumption :
-                   consumption.mpg! * (consumption.distanceByYear! / 100);
+  const consumed =
+    consumption.consumption !== undefined
+      ? consumption.consumption
+      : consumption.mpg! * (consumption.distanceByYear! / 100);
 
   return consumed * data.emissionFactors[consumption.fuel];
-}
+};
 
 /**
  * Compute CO2 emission from driving a specific vehicle in kgCO2/year
@@ -77,18 +85,23 @@ export const getEmissionConsumed = (consumption:ConsumptionT):number => {
  *   the estimated emission in kgCO2/year
  *   -1 in case of error (missing information)
  */
-export const getEmissionMileage = (vehicle:VehicleT):number => {
+export const getEmissionMileage = (vehicle: VehicleT): number => {
   // We either needs emissionFactor or consumption && fuel
-  if (vehicle.emissionFactor === undefined  && vehicle.consumption === undefined ||
-      vehicle.emissionFactor === undefined && vehicle.fuel === undefined) return -1;
+  if (
+    (vehicle.emissionFactor === undefined &&
+      vehicle.consumption === undefined) ||
+    (vehicle.emissionFactor === undefined && vehicle.fuel === undefined)
+  )
+    return -1;
   // Return from consumption && fuel
-  if (vehicle.consumption !== undefined ) return getEmissionConsumed({
-    consumption: vehicle.consumption * vehicle.distanceByYear / 100, // * yearFactor
-    fuel: vehicle.fuel!
-  })
+  if (vehicle.consumption !== undefined)
+    return getEmissionConsumed({
+      consumption: (vehicle.consumption * vehicle.distanceByYear) / 100, // * yearFactor
+      fuel: vehicle.fuel!
+    });
   // Return from emissionFactor
-  return vehicle.distanceByYear * (vehicle.emissionFactor! / 1000);// * yearFactor;
-}
+  return vehicle.distanceByYear * (vehicle.emissionFactor! / 1000); // * yearFactor;
+};
 
 /**
  * Compute CO2 emission estimation from driving a type of vehicle in kgCO2/year
@@ -116,13 +129,38 @@ export const getEmissionMileage = (vehicle:VehicleT):number => {
  *   the estimated emission in kgCO2e/year
  *   -1 in case of error (cannot find the data for this type of vehicle)
  */
-export const getEmissionEstimated = (model:ModelT):number => {
+export const getEmissionEstimated = (model: ModelT): number => {
   const vehicleData = data.emissionFigure.vehicle[model.type][model.fuel];
   if (!vehicleData) return -1;
 
   const startYear = data.emissionFigure.yearStart;
-  const closestYear = Math.min(Math.max(startYear, model.year), startYear + vehicleData!.length - 1);
+  const closestYear = Math.min(
+    Math.max(startYear, model.year),
+    startYear + vehicleData!.length - 1
+  );
   const emissionFactor = vehicleData[closestYear - startYear];
 
   return model.distanceByYear * (emissionFactor / 1000);
-}
+};
+
+/**
+ * Return the average co2 estimation from PC (private vehicle) in kgCO2e/year.
+ *
+ * @description
+ * It is a simple proportion taking the total private vehicle emission estimated from private vehicle
+ * divided by the number of vehicle.
+ *
+ * emission = emissions / #vehicles
+ * [kgCO2e/year/vehicle] = [kgCO2e/kg/year] / [vehicle]
+ *
+ * @warning
+ * Implementation is defined as a lazy singleton that compute only once.
+ *
+ * @return
+ * The estimated co2 emission in kgCO2e/year (per vehicle)
+ */
+export const getEmissionAvg = (): number => {
+  return (
+    avgEmission || data.emissionsMeasured.car / data.emissionsMeasured.carSize
+  );
+};
