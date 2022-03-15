@@ -14,21 +14,20 @@ The last one is the least precise, but still allows you to get a fairly good CO2
 
 # Carbon Emission Factors
 
-All our carbon emission factors come from the same trusted source ADEME ("Agence De l'Environnement et de la Maîtrise de l'Énergie"), which is the French Agency for Ecological Transition.
+All our carbon emission factors come from the two trusted source CITEPA (Secten Reports 2021) & ADEME ("Agence De l'Environnement et de la Maîtrise de l'Énergie"), which is the French Agency for Ecological Transition.
 
 ## Fuel Consumption
 
-The fuel emission factors are expressed in **kgCO2e/litre**.
-Those values take into account both Combustion and Upstream (Extraction/Process, Transport, Refining, Distribution) emissions:
+The fuel emission factors are expressed in **kgCO2e/litre** and comes from the CITEPA SECTEN report:
 
-- **Gasoil**: 3.17
+- **Gasoil**: 2.514
 - **Fuel**: 2.79
 - **Electric**: 0
-- **LPG**: 1.86
-- **E85**: 1.46
+- **LPG**: 1.671
+- **E85**: 2.178
 - **Flight**: 3.01
 
-Using this Emission Factor is straight and depends on a minimum of parameters:
+Using this Emission Factor is straight and depends on a minimum of parameters.
 
 ### Using real consumption
 
@@ -40,7 +39,9 @@ Using this Emission Factor is straight and depends on a minimum of parameters:
 - Emission = MPG _ (Mileage / 100) _ Factor
 - [kgCO2e/year] = [L/100Km] _ [100Km/year] _ [kgCO2e/L]
 
-Note:
+## Note
+
+An other set of emissions factors is available as "emissionFactorsADEME". Those ones use an another computation methodology : taking into account both Combustion and Upstream (Extraction/Process, Transport, Refining, Distribution) emissions.
 
 - You may find those numbers there: https://www.bilans-ges.ademe.fr/fr/basecarbone/.
 - Those data are mainly calculated with the GWP at 100 years of the 5th IPCC report (the last). See the IPCC website: http://www.ipcc.ch/report/ar5/wg1/.
