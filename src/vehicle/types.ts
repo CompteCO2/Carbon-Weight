@@ -4,6 +4,7 @@ export enum FuelE {
   "electric" = "electric",
   "fuel" = "fuel",
   "gasoil" = "gasoil",
+  "GNV" = "GNV",
   "LPG" = "LPG"
 }
 

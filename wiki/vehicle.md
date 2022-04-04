@@ -21,9 +21,10 @@ All our carbon emission factors come from the two trusted source CITEPA (Secten 
 The fuel emission factors are expressed in **kgCO2e/litre** and comes from the CITEPA SECTEN report:
 
 - **Gasoil**: 2.514
-- **Fuel**: 2.79
+- **Fuel**: 2.178
 - **Electric**: 0
 - **LPG**: 1.671
+- **GNV**: 0.571
 - **E85**: 2.178
 - **Flight**: 3.01
 

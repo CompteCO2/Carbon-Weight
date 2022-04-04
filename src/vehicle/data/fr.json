@@ -2,8 +2,9 @@
   "emissionFactors": {
     "E85": 2.178,
     "electric": 0,
-    "fuel": 2.79,
+    "fuel": 2.178,
     "gasoil": 2.514,
+    "GNV": 0.571,
     "LPG": 1.671
   },
   "emissionFactorsADEME": {

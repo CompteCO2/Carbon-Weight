@@ -67,6 +67,16 @@ const SAMPLE_DATA = [
     testDescription: "Drive 10 000Km driving 7L/100km - Gasoil"
   },
   {
+    vehicle: { consumption: 7, distanceByYear: 10000, fuel: FuelE.GNV },
+    expectedResult: 399,
+    testDescription: "Drive 10 000Km driving 7L/100km - GNV"
+  },
+  {
+    vehicle: { consumption: 7, distanceByYear: 10000, fuel: FuelE.fuel },
+    expectedResult: 1524,
+    testDescription: "Drive 10 000Km driving 7L/100km - Fuel (Petrol)"
+  },
+  {
     vehicle: { distanceByYear: 10000, emissionFactor: 232.2 },
     expectedResult: 2322,
     testDescription:

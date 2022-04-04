@@ -67,6 +67,16 @@ const SAMPLE_DATA = [
     testDescription: "Consumed 1000L of Gasoil"
   },
   {
+    consumption: { consumption: 1000, fuel: FuelE.GNV },
+    expectedResult: 571,
+    testDescription: "Consumed 1000L of GNV"
+  },
+  {
+    consumption: { consumption: 1000, fuel: FuelE.fuel },
+    expectedResult: 2178,
+    testDescription: "Consumed 1000L of Fuel (Petrol)"
+  },
+  {
     consumption: { distanceByYear: 10000, fuel: FuelE.gasoil, mpg: 10 },
     expectedResult: 2514,
     testDescription: "Drive 10 000Km using 10L/100km --> (1000L eq) of Gasoil"
