@@ -29,7 +29,7 @@ The Housing Consumption factors are grouped by and depends on:
 
 **Consumption Surface Factor**: https://www.bilans-ges.ademe.fr/fr/accueil/documentation-gene/index/page/Chauffage. They use actual statistics (open data) provided by the CEREN (CENTER FOR ECONOMIC STUDIES AND RESEARCH ON ENERGY) - https://www.ceren.fr/ - to compute those factors.
 
-**Combustible Emission Factor**: We use the last version of the carbon base data (2021) -https://www.bilans-ges.ademe.fr/fr/basecarbone.
+**Combustible Emission Factor**: We use the last version of the carbon base data (2022) -https://www.bilans-ges.ademe.fr/fr/basecarbone.
 
 Note: The electric data source come from the ADEME report (2020) "Positioning of ADEME on the calculation of the CO2 content of electricity, in the case of electric heating" (https://www.ademe.fr/sites/default/files/assets/documents/fiche-technique-ademe-contenu-co2-electricite-2020-v2.pdf).
 

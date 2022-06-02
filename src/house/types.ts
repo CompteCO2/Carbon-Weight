@@ -1,4 +1,12 @@
+// Data sets available
+export enum DataE {
+  "ADEME_2022" = "ADEME_2022",
+  "CCO2_2022" = "CCO2_2022",
+  "CITEPA_2021" = "CITEPA_2021"
+}
+
 // Climate types available in the country
+// Note: Factor introduced and available in CCO2 dataset
 export enum ClimateE {
   H1 = "H1", // Cold
   H2 = "H2", // Medium
@@ -14,7 +22,7 @@ export enum HeaterE {
   GPL = "GPL", // GPL (Propane-Butane) - Kg
   heatPump = "heatPump", // Heat Pump (electric)
   thermalSolar = "thermalSolar", // Thermal Solar (electric)
-  //  propane = "Propane", // Propane - Kg
+  propane = "propane", // Propane - Kg
   wood = "wood" // Firewood / Coal - Kg
 }
 
@@ -39,7 +47,7 @@ export type ConsumptionI = {
 
 // Combustible factors informations
 export type HeaterI = {
-  emissionFactor: number; // kWh/(m².year)
+  emissionFactor?: number; // kWh/(m².year)
   energyFactor: number; // kgCO2e/U (combustible unit)
 };
 
@@ -62,18 +70,20 @@ export type HouseT = {
 
 // Interface of data factors used to compute emission
 export type DataI = {
-  climateCoeffs: { [key in keyof typeof ClimateE]: number }; // Coeff
+  climateCoeffs?: { [key in keyof typeof ClimateE]: number }; // Coeff
   emissionFactors: { [key in keyof typeof HeaterE]: HeaterI }; // kgCO2e/kWh
-  consumptionFactors: {
+  consumptionFactors?: {
     [key in keyof typeof YearE]: {
       [key in keyof typeof HouseE]: {
         [key in keyof typeof HeaterE]: ConsumptionI;
       };
     };
   };
-  regions: [RegionI];
-  study: {
-    apartment: number;
-    house: number;
+  regions?: [RegionI];
+  study?: {
+    apartment?: number;
+    house?: number;
+    residentCount?: number;
+    totalEmission?: number;
   };
 };

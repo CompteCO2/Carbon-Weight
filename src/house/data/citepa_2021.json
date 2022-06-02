@@ -1,0 +1,29 @@
+{
+  "emissionFactors": {
+    "electric": {
+      "energyFactor": 0.084
+    },
+    "fuelOil": {
+      "energyFactor": 2.68
+    },
+    "gas": {
+      "energyFactor": 0.187
+    },
+    "GPL": {
+      "energyFactor": -1
+    },
+    "propane": {
+      "energyFactor": 2.98
+    },
+    "urban": {
+      "energyFactor": 0.056
+    },
+    "wood": {
+      "energyFactor": 73
+    }
+  },
+  "study": {
+    "totalEmission": 43700000000,
+    "residentCount": 67064000
+  }
+}

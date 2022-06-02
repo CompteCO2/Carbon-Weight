@@ -7,20 +7,23 @@
   "emissionFactors": {
     "electric": {
       "emissionFactor": 0.079,
-      "energyFactor": 0.079
+      "energyFactor": -1
     },
     "fuelOil": {
       "emissionFactor": 0.324,
-      "energyFactor": 3.86
+      "energyFactor": 2.68
     },
-
     "gas": {
       "emissionFactor": 0.244,
-      "energyFactor": 3.23
+      "energyFactor": 0.187
     },
     "GPL": {
       "emissionFactor": 0.275,
-      "energyFactor": 3.45
+      "energyFactor": -1
+    },
+    "propane": {
+      "emissionFactor": 0.275,
+      "energyFactor": 2.98
     },
     "urban": {
       "emissionFactor": 0.109,
@@ -28,7 +31,7 @@
     },
     "wood": {
       "emissionFactor": 0.0295,
-      "energyFactor": 0.114
+      "energyFactor": -1
     }
   },
   "consumptionFactors": {
@@ -647,8 +650,9 @@
       "FACTOR": "H3"
     }
   ],
-
   "study": {
+    "totalEmission": 43700000000,
+    "residentCount": 67064000,
     "apartment": 12276500,
     "house": 16103200
   }
