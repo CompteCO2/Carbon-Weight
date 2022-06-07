@@ -45,6 +45,13 @@ export default class House {
   getData = (): DataI => this.data;
 
   /**
+   * Return the inner data set name
+   *
+   * @return constant data loaded
+   */
+  getDataset = (): DataE => this.dataSet;
+
+  /**
    * Compute the co2 emission consumed in kgCO2e from a list of consumed ressources
    * Negative values are allowed (this could be due to energy provider correction)
    *

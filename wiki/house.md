@@ -3,7 +3,7 @@
 The carbon footprint from heating usage is proposed with two computations, both extremely simple :
 
 - **From Real Consumption**: Use the exact consumption of a combustible to compute the CO2 emission in **kgCO2e**.
-- **From House**: Use housing model to compute an estimation of CO2 emission in **kgCO2e/year**.
+- **From House Type**: Use housing model to compute an estimation of CO2 emission in **kgCO2e/year**.
 
 First method is straight (U is the combustible unit):
 
@@ -12,12 +12,12 @@ First method is straight (U is the combustible unit):
 
 Second one uses a few more factors:
 
-- Emission = Surface _ ConsumptionFactor _ CombustibleFactor \* ClimateCoef
-- [kgCO2e/year] = [m²] _ [kWh/(m².year)] _ [kgCO2e/kW] \* Cste
+- Emission = Surface \* ConsumptionFactor \* CombustibleFactor \* ClimateCoef
+- [kgCO2e/year] = [m²] \* [kWh/(m².year)] \* [kgCO2e/kW] \* Cste
 
 ## Emission Factors
 
-We use the last version of the carbon base data (2021) from he French Agency for Ecological Transition (ADEME). The factors are pairs defined by the duo "Consumption Surface Factor" **kWh/(m².year)** and the "Combustible Emission Factor" **kgCO2e/kWh**.
+The factors are pairs defined by the duo "Consumption Surface Factor" **kWh/(m².year)** and the "Combustible Emission Factor" **kgCO2e/kWh**.
 
 The Housing Consumption factors are grouped by and depends on:
 
@@ -27,15 +27,34 @@ The Housing Consumption factors are grouped by and depends on:
 
 ### Sources:
 
-**Consumption Surface Factor**: https://www.bilans-ges.ademe.fr/fr/accueil/documentation-gene/index/page/Chauffage. They use actual statistics (open data) provided by the CEREN (CENTER FOR ECONOMIC STUDIES AND RESEARCH ON ENERGY) - https://www.ceren.fr/ - to compute those factors.
+Three datasets are currently available to compute emissions:
 
-**Combustible Emission Factor**: We use the last version of the carbon base data (2022) -https://www.bilans-ges.ademe.fr/fr/basecarbone.
+- ADEME (2022) - French Agency for Ecological Transition
+- CCO2 (2022) - Aggregation of ADEME & CITEPA with some correction coefficients.
+- CITEPA (2021) - Technical Reference Center for Air Pollution and Climate Change (Non-Profit Association)
+
+#### ADEME
+
+We use the last version of the carbon base data (2022) for all estimations.
+
+**Consumption Surface Factor**:
+
+https://www.bilans-ges.ademe.fr/fr/accueil/documentation-gene/index/page/Chauffage. They use actual statistics (open data) provided by the CEREN (CENTER FOR ECONOMIC STUDIES AND RESEARCH ON ENERGY) - https://www.ceren.fr/ - to compute those factors.
+
+**Combustible Emission Factor**:
+
+We use the last version of the carbon base data (2022) -https://www.bilans-ges.ademe.fr/fr/basecarbone.
 
 Note: The electric data source come from the ADEME report (2020) "Positioning of ADEME on the calculation of the CO2 content of electricity, in the case of electric heating" (https://www.ademe.fr/sites/default/files/assets/documents/fiche-technique-ademe-contenu-co2-electricite-2020-v2.pdf).
 
 Note bis: The urban data source come from the Ministry of Ecological Transition (2020) (https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000042428417/). We made the average removing missing references.
 
-## Climatic Zones
+#### CITEPA - CCO2
+
+The data comming from CITEPA are all available within a single PDF report - "Rapport Secten Édition 2021":
+https://www.citepa.org/wp-content/uploads/publications/secten/Citepa_Rapport-Secten_ed2021_v1_30072021.pdf
+
+## Climatic Zones (CCO2)
 
 Energy needs are different depending on the climate. This is why the RT 2020 (Thermal Regulations 2020) defines a classification of French departments into 3 major climatic zones: H1, H2, H3. The classification is made by the government and available on its website (cf. https://www.ecologie.gouv.fr/sites/default/files/La%20r%C3%A9partition%20des%20d%C3%A9partements%20par%20zone%20climatique.pdf).
 
@@ -57,9 +76,7 @@ In order to take into account these geographical variations, the calculator assi
 
 ## National Average CO2 Emission
 
-Our national co2 emission average "getEmissionAvg()" give us:
-
-- **XXXX kgCO2e/year from heating housing**
+### ADEME
 
 Using the ADEME/CEREN source - https://www.bilans-ges.ademe.fr/fr/accueil/documentation-gene/index/page/Chauffage - we compute the nation average co2 emission by normalizing and summing the average emission of each housing from:
 
@@ -68,7 +85,15 @@ Using the ADEME/CEREN source - https://www.bilans-ges.ademe.fr/fr/accueil/docume
 - **Average Proportion of each energy in heating** - % (equally divided between "new" and "old" housing and grouped by housing type).
 - **Proportion of Apartments & Houses in the study** - %
 
-## Possible Future Enhancement
+### CITEPA - CCO2
+
+Here, the average is a simple ratio "totalEmission / #inhabitants".
+
+The total emissions of passenger cars and two-wheelers, calculated in the SECTEN report of CITEPA, amount to 80.6 million tons of CO2 on 67.064 million inhabitants.
+
+This figure does not take into account all the emissions of the French road transport, i.e. 113.6 million tons of CO2 in 2020, in order to compare only the emissions of our private cars given by the carbon calculator, with the national average of our private cars.
+
+#### Waiting trusted source for work reduction coefficients.
 
 Add a reduction coefficient from the work type a house get from:
 

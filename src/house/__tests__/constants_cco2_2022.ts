@@ -6,7 +6,7 @@ describe("Testing data loaded", () => {
   const house = House.build(DataE.CCO2_2022);
   const data = house.getData();
   test("Check data", () => expect(data).toBeDefined());
-
+  test("Check dataset", () => expect(house.getDataset()).toBe(DataE.CCO2_2022));
   test("Check min e-factors", () =>
     expect(Object.keys(data.emissionFactors).length).toEqual(7));
 });
