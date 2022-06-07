@@ -25,7 +25,7 @@ The Housing Consumption factors are grouped by and depends on:
 - Type of Combustible (Electric, Fuel oil, Gas, GPL, Urban, Wood/Coal).
 - Year of Construction (Before or After 1975).
 
-### Sources:
+## Sources:
 
 Three datasets are currently available to compute emissions:
 
@@ -33,7 +33,7 @@ Three datasets are currently available to compute emissions:
 - CCO2 (2022) - Aggregation of ADEME & CITEPA with some correction coefficients.
 - CITEPA (2021) - Technical Reference Center for Air Pollution and Climate Change (Non-Profit Association)
 
-#### ADEME
+### ADEME
 
 We use the last version of the carbon base data (2022) for all estimations.
 
@@ -49,7 +49,16 @@ Note: The electric data source come from the ADEME report (2020) "Positioning of
 
 Note bis: The urban data source come from the Ministry of Ecological Transition (2020) (https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000042428417/). We made the average removing missing references.
 
-#### CITEPA - CCO2
+#### Note
+
+Why would ADEME emission factors are higher?
+
+Those ones use an another computation methodology : taking into account both Combustion and Upstream (Extraction/Process, Transport, Refining, Distribution) emissions.
+
+- You may find those numbers there: https://www.bilans-ges.ademe.fr/fr/basecarbone/.
+- Those data are mainly calculated with the GWP at 100 years of the 5th IPCC report (the last). See the IPCC website: http://www.ipcc.ch/report/ar5/wg1/.
+
+### CITEPA - CCO2
 
 The data comming from CITEPA are all available within a single PDF report - "Rapport Secten Édition 2021":
 https://www.citepa.org/wp-content/uploads/publications/secten/Citepa_Rapport-Secten_ed2021_v1_30072021.pdf
@@ -89,16 +98,6 @@ Using the ADEME/CEREN source - https://www.bilans-ges.ademe.fr/fr/accueil/docume
 
 Here, the average is a simple ratio "totalEmission / #inhabitants".
 
-The total emissions of passenger cars and two-wheelers, calculated in the SECTEN report of CITEPA, amount to 80.6 million tons of CO2 on 67.064 million inhabitants.
+SECTEN data from CITEPA reports a total of 43.7 millions tons of CO2 for residential building use and domestic activities in 2020.
 
-This figure does not take into account all the emissions of the French road transport, i.e. 113.6 million tons of CO2 in 2020, in order to compare only the emissions of our private cars given by the carbon calculator, with the national average of our private cars.
-
-#### Waiting trusted source for work reduction coefficients.
-
-Add a reduction coefficient from the work type a house get from:
-
-- Attic Insulation
-- Floor Insulation
-- Ventilation
-- Wall Insulation
-- Window Change
+This figure does not take into account the use of our tertiary buildings, i.e. 26.2 million tons of CO2 in 2020, in order to compare only the emissions from our homes.

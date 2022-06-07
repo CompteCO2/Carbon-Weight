@@ -1,5 +1,5 @@
 {
-  "entryPoints": ["./src"],
+  "entryPoints": ["./src/*"],
   "exclude": "**/__tests__",
   "out": "doc"
 }
