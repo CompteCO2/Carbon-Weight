@@ -1,63 +1,126 @@
-import { ConsumptionT, DataI, ModelT, VehicleT } from "./types";
-import dataJSON from "./data/fr.json";
-const data = dataJSON as DataI;
-let avgEmission: number | undefined = undefined; // Singleton average computation
-
-/**
- * Return the current data constants loaded
- *
- * @return constant data loaded
- */
-export const getData = (): DataI => {
-  return data;
+import { ConsumptionT, DataE, DataI, ModelT, VehicleT } from "./types";
+//
+// Data sets available
+// Note: avoid dealing with dynamic loading drawbacks
+import ADEME_2022 from "./data/ademe_2022.json";
+import CCO2_2022 from "./data/cco2_2022.json";
+import CITEPA_2021 from "./data/citepa_2021.json";
+const DATA = {
+  ADEME_2022: ADEME_2022 as DataI,
+  CCO2_2022: CCO2_2022 as DataI,
+  CITEPA_2021: CITEPA_2021 as DataI
 };
 
-/**
- * Compute a CO2 emission from the consumption in kgCO2e/year using
- * fuel emission factors in kgCO2e/litre
- *
- * @description
- * Depending on the availibity of the consumption parameter, it whether use the following:
- *
- * Using consumption
- * - Emission = Consumption * Factor
- * - [kgCO2e/year] = [L/year] * [kgCO2e/L]
- *
- * Using Mileage & MPG
- * Emission = MPG * (Mileage / 100) * Factor
- * [kgCO2e/year] = [L/100Km] * [100Km/year] * [kgCO2e/L]
- *
- * Although this computation method is the most precise, it relies on a parameter
- * that could be quite uncertain (depends on personal measure) or
- * even unknown. Indeed, the exact MPG (or real fuel consumption)
- * for the period of the annual mileage could be difficult to get with precision
- * if not measured properly.
- *
- * @param consumption - the measured consumption in { L } or { Mileage & MPG }
- *
- * @return
- *   the emission in kgCO2/year
- *   -1 in case of error (missing information)
- */
-export const getEmissionConsumed = (consumption: ConsumptionT): number => {
-  // We either needs consumption or mileage && MPG
-  if (
-    (consumption.consumption === undefined &&
-      consumption.distanceByYear === undefined) ||
-    (consumption.consumption === undefined && consumption.mpg === undefined)
-  )
-    return -1;
+export default class Vehicle {
+  private avgEmission: number | undefined; // Singleton average computation
+  private data: DataI; // Factor Emissions Loaded
+  private dataSet: DataE; // Factor Emissions Source
 
-  // Retrieve the consumption in L
-  const consumed =
-    consumption.consumption !== undefined
-      ? consumption.consumption
-      : consumption.mpg! * (consumption.distanceByYear! / 100);
+  constructor(dataSet: DataE, data: DataI) {
+    if (!data) throw new Error("Cannot be instanciated without dataset");
+    this.data = data;
+    this.dataSet = dataSet;
+    this.avgEmission = undefined;
+  }
 
-  return consumed * data.emissionFactors[consumption.fuel];
-};
+  /**
+   * Create a calculator instance from dataset
+   *
+   * @return new House calculator - Throw error if dataset not loaded.
+   */
+  static build(dataset: DataE) {
+    try {
+      const data = DATA[dataset];
+      return new Vehicle(dataset, data);
+    } catch {
+      throw new Error("Dataset Not Available");
+    }
+  }
 
-/**
+  /**
+   * Return the current data constants loaded
+   *
+   * @return constant data loaded
+   */
+  getData = (): DataI => this.data;
+
+  /**
+   * Return the inner data set name
+   *
+   * @return constant data loaded
+   */
+  getDataset = (): DataE => this.dataSet;
+
+  /**
+   * Compute a CO2 emission from the consumption in kgCO2e/year using
+   * fuel emission factors in kgCO2e/litre
+   *
+   * @description
+   * Depending on the availibity of the consumption parameter, it whether use the following:
+   *
+   * Using consumption
+   * - Emission = Consumption * Factor
+   * - [kgCO2e/year] = [L/year] * [kgCO2e/L]
+   *
+   * Using Mileage & MPG
+   * Emission = MPG * (Mileage / 100) * Factor
+   * [kgCO2e/year] = [L/100Km] * [100Km/year] * [kgCO2e/L]
+   *
+   * Although this computation method is the most precise, it relies on a parameter
+   * that could be quite uncertain (depends on personal measure) or
+   * even unknown. Indeed, the exact MPG (or real fuel consumption)
+   * for the period of the annual mileage could be difficult to get with precision
+   * if not measured properly.
+   *
+   * @param consumption - the measured consumption in { L } or { Mileage & MPG }
+   * @param dataset - the factor emission source
+   *
+   * @return
+   *   the emission in kgCO2/year
+   *   -1 in case of error (missing information)
+   */
+  getEmissionConsumed = (consumption: ConsumptionT): number => {
+    // We either needs consumption or mileage && MPG
+    if (
+      (consumption.consumption === undefined &&
+        consumption.distanceByYear === undefined) ||
+      (consumption.consumption === undefined && consumption.mpg === undefined)
+    )
+      return -1;
+
+    // Retrieve the consumption in L
+    const consumed =
+      consumption.consumption !== undefined
+        ? consumption.consumption
+        : consumption.mpg! * (consumption.distanceByYear! / 100);
+
+    return consumed * this.data.emissionFactors[consumption.fuel];
+  };
+
+  /**
+   * Return the average co2 estimation from PC (private vehicle) in kgCO2e/year.
+   *
+   * @TODO review, source and explain differents computation
+   *
+   * @description
+   * It is a simple proportion taking the total private vehicle emission estimated from private vehicle
+   * divided by the number of vehicle.
+   *
+   * emission = emissions / #vehicles
+   * [kgCO2e/year/vehicle] = [kgCO2e/kg/year] / [vehicle]
+   *
+   * @param dataset - the factor emission source
+   *
+   * @return
+   * The estimated co2 emission in kgCO2e/year (per vehicle)
+   */
+  getEmissionAvg = (): number => {
+    if (this.avgEmission) return this.avgEmission;
+    this.avgEmission = this.data.study.totalEmission / this.data.study.carCount;
+    return this.avgEmission;
+  };
+
+  /**
  * Compute CO2 emission from driving a specific vehicle in kgCO2/year
  *
  * @TODO review, source and explain the yearFactor constant computation
@@ -80,87 +143,70 @@ export const getEmissionConsumed = (consumption: ConsumptionT): number => {
  - [kgCO2e/year] = [L/100Km] * [100Km/year] * [kgCO2e/L] * Cste
  *
  * @param vehicle - the vehicle measured factors in ({ gCO2e/km } or { L/100Km + FuelE }) and the Mileage
+ * @param dataset - the factor emission source
  *
  * @return
  *   the estimated emission in kgCO2/year
  *   -1 in case of error (missing information)
  */
-export const getEmissionMileage = (vehicle: VehicleT): number => {
-  // We either needs emissionFactor or consumption && fuel
-  if (
-    (vehicle.emissionFactor === undefined &&
-      vehicle.consumption === undefined) ||
-    (vehicle.emissionFactor === undefined && vehicle.fuel === undefined)
-  )
-    return -1;
-  // Return from consumption && fuel
-  if (vehicle.consumption !== undefined)
-    return getEmissionConsumed({
-      consumption: (vehicle.consumption * vehicle.distanceByYear) / 100, // * yearFactor
-      fuel: vehicle.fuel!
-    });
-  // Return from emissionFactor
-  return vehicle.distanceByYear * (vehicle.emissionFactor! / 1000); // * yearFactor;
-};
+  getEmissionMileage = (vehicle: VehicleT): number => {
+    // We either needs emissionFactor or consumption && fuel
+    if (
+      (vehicle.emissionFactor === undefined &&
+        vehicle.consumption === undefined) ||
+      (vehicle.emissionFactor === undefined && vehicle.fuel === undefined)
+    )
+      return -1;
+    // Return from consumption && fuel
+    if (vehicle.consumption !== undefined)
+      return this.getEmissionConsumed({
+        consumption: (vehicle.consumption * vehicle.distanceByYear) / 100, // * yearFactor
+        fuel: vehicle.fuel!
+      });
+    // Return from emissionFactor
+    return vehicle.distanceByYear * (vehicle.emissionFactor! / 1000); // * yearFactor;
+  };
 
-/**
- * Compute CO2 emission estimation from driving a type of vehicle in kgCO2/year
- *
- * @description
- * Allows you to get a fairly good CO2e emission estimation from only
- * the vehicle type and your annual mileage.
- *
- * The constant factor unit is **gCO2e/km** and are statistic averages depending
- * on the three following parameters:
- * - Vehicle Type: Light utility, Standard, Two Wheeler.
- * - Fuel Type: CNG, Diesel, Electric, LPG, Petrol.
- * - Year of manufacture: From 1990 To 2018.
- *
- * So, the formula is kinda the same as the one used in "Registration Card".
- * The change is on the emission factors that come from statistical source and
- * already include vehicle aging.
- *
- * Emission = Mileage * Factor / 1000
- * [kgCO2e/year] = [Km/year] * [kgCO2e/km]
- *
- * @param vehicle - the vehicle type and the yearly mileage.
- *
- * @return
- *   the estimated emission in kgCO2e/year
- *   -1 in case of error (cannot find the data for this type of vehicle)
- */
-export const getEmissionEstimated = (model: ModelT): number => {
-  const vehicleData = data.emissionFigure.vehicle[model.type][model.fuel];
-  if (!vehicleData) return -1;
+  /**
+   * Compute CO2 emission estimation from driving a type of vehicle in kgCO2/year
+   *
+   * @description
+   * Allows you to get a fairly good CO2e emission estimation from only
+   * the vehicle type and your annual mileage.
+   *
+   * The constant factor unit is **gCO2e/km** and are statistic averages depending
+   * on the three following parameters:
+   * - Vehicle Type: Light utility, Standard, Two Wheeler.
+   * - Fuel Type: CNG, Diesel, Electric, LPG, Petrol.
+   * - Year of manufacture: From 1990 To 2018.
+   *
+   * So, the formula is kinda the same as the one used in "Registration Card".
+   * The change is on the emission factors that come from statistical source and
+   * already include vehicle aging.
+   *
+   * Emission = Mileage * Factor / 1000
+   * [kgCO2e/year] = [Km/year] * [kgCO2e/km]
+   *
+   * @param vehicle - the vehicle type and the yearly mileage.
+   * @param dataset - the factor emission source
+   *
+   * @return
+   *   the estimated emission in kgCO2e/year
+   *   -1 in case of error (cannot find the data for this type of vehicle)
+   */
+  getEmissionEstimated = (model: ModelT): number => {
+    const vehicleData = this.data.emissionFigure?.vehicle?.[model.type]?.[
+      model.fuel
+    ];
+    if (!vehicleData) return -1;
 
-  const startYear = data.emissionFigure.yearStart;
-  const closestYear = Math.min(
-    Math.max(startYear, model.year),
-    startYear + vehicleData!.length - 1
-  );
-  const emissionFactor = vehicleData[closestYear - startYear];
+    const startYear = this.data.emissionFigure!.yearStart;
+    const closestYear = Math.min(
+      Math.max(startYear, model.year),
+      startYear + vehicleData!.length - 1
+    );
+    const emissionFactor = vehicleData[closestYear - startYear];
 
-  return model.distanceByYear * (emissionFactor / 1000);
-};
-
-/**
- * Return the average co2 estimation from PC (private vehicle) in kgCO2e/year.
- *
- * @description
- * It is a simple proportion taking the total private vehicle emission estimated from private vehicle
- * divided by the number of vehicle.
- *
- * emission = emissions / #vehicles
- * [kgCO2e/year/vehicle] = [kgCO2e/kg/year] / [vehicle]
- *
- * @warning
- * Implementation is defined as a lazy singleton that compute only once.
- *
- * @return
- * The estimated co2 emission in kgCO2e/year (per vehicle)
- */
-export const getEmissionAvg = (): number => {
-  return (
-    avgEmission || data.emissionsMeasured.car / data.emissionsMeasured.carSize
-  );
-};
+    return model.distanceByYear * (emissionFactor / 1000);
+  };
+}

@@ -14,20 +14,26 @@ The last one is the least precise, but still allows you to get a fairly good CO2
 
 # Carbon Emission Factors
 
-All our carbon emission factors come from the two trusted source CITEPA (Secten Reports 2021) & ADEME ("Agence De l'Environnement et de la Maîtrise de l'Énergie"), which is the French Agency for Ecological Transition.
+## Sources:
+
+Three datasets are currently available to compute emissions:
+
+- ADEME (2022) - French Agency for Ecological Transition
+- CCO2 (2022) - Aggregation of ADEME & CITEPA with some correction coefficients.
+- CITEPA (2021) - Technical Reference Center for Air Pollution and Climate Change (Non-Profit Association)
+
+### Note
+
+Why would ADEME emission factors are higher?
+
+Those ones use an another computation methodology : taking into account both Combustion and Upstream (Extraction/Process, Transport, Refining, Distribution) emissions.
+
+- You may find those numbers there: https://www.bilans-ges.ademe.fr/fr/basecarbone/.
+- Those data are mainly calculated with the GWP at 100 years of the 5th IPCC report (the last). See the IPCC website: http://www.ipcc.ch/report/ar5/wg1/.
 
 ## Fuel Consumption
 
-The fuel emission factors are expressed in **kgCO2e/litre** and comes from the CITEPA SECTEN report:
-
-- **Gasoil**: 2.514
-- **Fuel**: 2.178
-- **Electric**: 0
-- **LPG**: 1.671
-- **GNV**: 0.571
-- **E85**: 2.178
-- **Flight**: 3.01
-
+The fuel emission factors are expressed in **kgCO2e/litre** (cf. datasets).
 Using this Emission Factor is straight and depends on a minimum of parameters.
 
 ### Using real consumption
@@ -37,15 +43,8 @@ Using this Emission Factor is straight and depends on a minimum of parameters.
 
 ### Using Mileage & MPG
 
-- Emission = MPG _ (Mileage / 100) _ Factor
-- [kgCO2e/year] = [L/100Km] _ [100Km/year] _ [kgCO2e/L]
-
-## Note
-
-An other set of emissions factors is available as "emissionFactorsADEME". Those ones use an another computation methodology : taking into account both Combustion and Upstream (Extraction/Process, Transport, Refining, Distribution) emissions.
-
-- You may find those numbers there: https://www.bilans-ges.ademe.fr/fr/basecarbone/.
-- Those data are mainly calculated with the GWP at 100 years of the 5th IPCC report (the last). See the IPCC website: http://www.ipcc.ch/report/ar5/wg1/.
+- Emission = MPG \* (Mileage / 100) \* Factor
+- [kgCO2e/year] = [L/100Km] \* [100Km/year] \* [kgCO2e/L]
 
 ## Registration Card
 
@@ -57,21 +56,17 @@ However, this value is evolving along the time as the vehicle get older and depe
 
 The constructor emission factor is expressed in **gCO2e/km** which can be found on the registration card of the vehicle - V.7 field (EU). Formula is as simple as:
 
-- - Emission = Mileage _ Factor / 1000 _ YearCorrection
-- - [kgCO2e/year] = [Km/year] _ [kgCO2e/km] _ Cste
+- Emission = Mileage \* Factor / 1000 \* YearCorrection
+- [kgCO2e/year] = [Km/year] \* [kgCO2e/km] \* Cste
 
 ### Using consumption factor
 
 Or it could either consumption factor expressed in **L/100Km**. We find back the formula of the first method using the fuel consumption factor coerced with the extra aging factor:
 
-- Emission = MPG _ (Mileage / 100) _ FuelEmissionFactor \* YearCorrection
-- [kgCO2e/year] = [L/100Km] _ [100Km/year] _ [kgCO2e/L] \* Cste
+- Emission = MPG \* (Mileage / 100) \* FuelEmissionFactor \* YearCorrection
+- [kgCO2e/year] = [L/100Km] \* [100Km/year] \*[kgCO2e/L] \* Cste
 
-Note: On our side we use the "mix driving condition" measure.
-
-### Aging Factor
-
-TODO - Complete review of constant computations (neutral for now).
+Note: On our side we use the "mix driving condition" measure for the ADEME data set.
 
 ## Car Type - gCO2e/km figure
 
@@ -90,11 +85,19 @@ The french factor emission constants - gCO2e/km figure - are coming from the "Ci
 
 ## National Average CO2 Emission
 
-Our national co2 emission average "getEmissionAvg()" give us:
-
-- **1973.35 kgCO2e/year from personal vehicle**
+### ADEME
 
 Using the ADEME/CEREN source "Citepa Transports Secten edition 2021" - we compute the nation average co2 emission by taking the total private vehicle emission estimated from private vehicle
 divided by the number of vehicle
 
 - **Average Emission Factor** - kWh/(m².year) (per vehicle)
+
+### CITEPA - CCO2
+
+Here, the average is a also simple ratio:
+
+- totalEmission / #inhabitants
+
+The total emissions of passenger cars and two-wheelers, calculated in the SECTEN report of CITEPA, amount to 80.6 million tons of CO2 on 67.064 million inhabitants.
+
+This figure does not take into account all the emissions of the French road transport, i.e. 113.6 million tons of CO2 in 2020, in order to compare only the emissions of our private cars given by the carbon calculator, with the national average of our private cars.

@@ -1,5 +1,5 @@
-import { getEmissionMileage } from "../";
-import { FuelE, VehicleT } from "../types";
+import Vehicle from "../";
+import { FuelE, DataE, VehicleT } from "../types";
 
 // Data interface used for testing purpose
 type DataI = {
@@ -10,9 +10,10 @@ type DataI = {
 
 // Run all the tests for a given dataset
 const runner = (dataset: DataI[]) => {
+  const vehicle = Vehicle.build(DataE.CCO2_2022);
   dataset.forEach((data: DataI) => {
     test(data.testDescription + " - Emission", () =>
-      expect(Math.floor(getEmissionMileage(data.vehicle))).toBe(
+      expect(Math.floor(vehicle.getEmissionMileage(data.vehicle))).toBe(
         data.expectedResult
       )
     );

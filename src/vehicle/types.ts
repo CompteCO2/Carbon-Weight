@@ -1,3 +1,10 @@
+// Data sets available
+export enum DataE {
+  "ADEME_2022" = "ADEME_2022",
+  "CCO2_2022" = "CCO2_2022",
+  "CITEPA_2021" = "CITEPA_2021"
+}
+
 // Fuel types available
 export enum FuelE {
   "E85" = "E85",
@@ -49,9 +56,9 @@ export type FigureT = {
 // Interface of data factors used to compute emission
 export type DataI = {
   emissionFactors: { [key: string]: number };
-  emissionFigure: FigureT;
-  emissionsMeasured: {
-    car: number;
-    carSize: number;
+  emissionFigure?: FigureT;
+  study: {
+    totalEmission: number;
+    carCount: number;
   };
 };

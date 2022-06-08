@@ -1,17 +1,10 @@
 {
   "emissionFactors": {
-    "E85": 2.178,
-    "electric": 0,
-    "fuel": 2.178,
-    "gasoil": 2.514,
-    "GNV": 0.571,
-    "LPG": 1.671
-  },
-  "emissionFactorsADEME": {
     "E85": 1.46,
     "electric": 0,
     "fuel": 2.79,
     "gasoil": 3.17,
+    "GNV": 0.122,
     "LPG": 1.86
   },
   "emissionFigure": {
@@ -335,8 +328,8 @@
       }
     }
   },
-  "emissionsMeasured": {
-    "car": 73.2e9,
-    "carSize": 37094312
+  "study": {
+    "totalEmission": 73.2e9,
+    "carCount": 37094312
   }
 }

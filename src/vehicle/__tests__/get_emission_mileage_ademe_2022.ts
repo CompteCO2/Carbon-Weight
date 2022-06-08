@@ -1,21 +1,24 @@
-import { getEmissionMileage } from "../";
-import { FuelE, VehicleT } from "../types";
+import Vehicle from "../";
+import { FuelE, DataE, VehicleT } from "../types";
 
 // Data interface used for testing purpose
 type DataI = {
-  expectedResult: number,
-  vehicle: VehicleT,
-  testDescription: string,
-}
+  expectedResult: number;
+  vehicle: VehicleT;
+  testDescription: string;
+};
 
 // Run all the tests for a given dataset
-const runner = (dataset:DataI[]) => {
-  dataset.forEach((data:DataI) => {
+const runner = (dataset: DataI[]) => {
+  const vehicle = Vehicle.build(DataE.ADEME_2022);
+  dataset.forEach((data: DataI) => {
     test(data.testDescription + " - Emission", () =>
-      expect(Math.floor(getEmissionMileage(data.vehicle))).toBe(data.expectedResult)
+      expect(Math.floor(vehicle.getEmissionMileage(data.vehicle))).toBe(
+        data.expectedResult
+      )
     );
-  })
-}
+  });
+};
 
 const WRONG_DATA = [
   {
@@ -32,7 +35,7 @@ const WRONG_DATA = [
     vehicle: { distanceByYear: 100 },
     expectedResult: -1,
     testDescription: "Missing parameter emissionFactor"
-  },
+  }
 ];
 
 const NUL_DATA = [
@@ -50,7 +53,7 @@ const NUL_DATA = [
     vehicle: { distanceByYear: 100, emissionFactor: 0 },
     expectedResult: 0,
     testDescription: "No emission"
-  },
+  }
 ];
 
 const SAMPLE_DATA = [
@@ -67,16 +70,19 @@ const SAMPLE_DATA = [
   {
     vehicle: { distanceByYear: 10000, emissionFactor: 232.2 },
     expectedResult: 2322,
-    testDescription: "Drive 10 000Km using the constant emission (co2 figure LUV) factor of Gasoil"
+    testDescription:
+      "Drive 10 000Km using the constant emission (co2 figure LUV) factor of Gasoil"
   },
   {
     vehicle: { consumption: 7, distanceByYear: 10000, fuel: FuelE.electric },
     expectedResult: 0,
     testDescription: "Electric has no emission"
-  },
+  }
 ];
 
-describe("Testing getEmissionMileage using wrong parameters", () => runner(WRONG_DATA));
+describe("Testing getEmissionMileage using wrong parameters", () =>
+  runner(WRONG_DATA));
 describe("Testing getEmissionMileage using nul data", () => runner(NUL_DATA));
-describe("Testing getEmissionMileage using well known results", () => runner(SAMPLE_DATA));
+describe("Testing getEmissionMileage using well known results", () =>
+  runner(SAMPLE_DATA));
 //...

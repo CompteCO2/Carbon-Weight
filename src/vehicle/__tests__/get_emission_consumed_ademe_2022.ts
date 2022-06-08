@@ -1,5 +1,5 @@
-import { getEmissionConsumed } from "../";
-import { ConsumptionT, FuelE } from "../types";
+import Vehicle from "../";
+import { ConsumptionT, DataE, FuelE } from "../types";
 
 // Data interface used for testing purpose
 type DataI = {
@@ -10,9 +10,10 @@ type DataI = {
 
 // Run all the tests for a given dataset
 const runner = (dataset: DataI[]) => {
+  const vehicle = Vehicle.build(DataE.ADEME_2022);
   dataset.forEach((data: DataI) => {
     test(data.testDescription + " - Emission", () =>
-      expect(Math.floor(getEmissionConsumed(data.consumption))).toBe(
+      expect(Math.floor(vehicle.getEmissionConsumed(data.consumption))).toBe(
         data.expectedResult
       )
     );
@@ -53,32 +54,22 @@ const NUL_DATA = [
 const SAMPLE_DATA = [
   {
     consumption: { consumption: 1000, fuel: FuelE.E85 },
-    expectedResult: 2178,
+    expectedResult: 1460,
     testDescription: "Consumed 1000L of E85"
   },
   {
     consumption: { distanceByYear: 10000, fuel: FuelE.E85, mpg: 10 },
-    expectedResult: 2178,
+    expectedResult: 1460,
     testDescription: "Drive 10 000Km using 10L/100km --> (1000L eq) of E85"
   },
   {
     consumption: { consumption: 1000, fuel: FuelE.gasoil },
-    expectedResult: 2514,
+    expectedResult: 3170,
     testDescription: "Consumed 1000L of Gasoil"
   },
   {
-    consumption: { consumption: 1000, fuel: FuelE.GNV },
-    expectedResult: 571,
-    testDescription: "Consumed 1000L of GNV"
-  },
-  {
-    consumption: { consumption: 1000, fuel: FuelE.fuel },
-    expectedResult: 2178,
-    testDescription: "Consumed 1000L of Fuel (Petrol)"
-  },
-  {
     consumption: { distanceByYear: 10000, fuel: FuelE.gasoil, mpg: 10 },
-    expectedResult: 2514,
+    expectedResult: 3170,
     testDescription: "Drive 10 000Km using 10L/100km --> (1000L eq) of Gasoil"
   },
   {
