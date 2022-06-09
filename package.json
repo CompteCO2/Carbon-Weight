@@ -1,6 +1,6 @@
 {
   "name": "@cco2/carbon-weight",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Carbon Footprint Calculator For Individuals And Households",
   "author": "Michael Jeulin-Lagarrigue <michael.jeulinl@gmail.com>",
   "license": "MIT",
@@ -41,7 +41,6 @@
     "build": "npm run lint && tsc && npm run test",
     "build:release": "npm run lint && tsc && npm run test && npm run docs",
     "docs": "typedoc --plugin typedoc-plugin-markdown src/*",
-    "install": "tsc",
     "lint": "eslint -c .eslintrc.json",
     "test": "jest  --env=node --colors --coverage test"
   }
