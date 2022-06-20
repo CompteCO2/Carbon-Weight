@@ -1,5 +1,4 @@
 {
-  "averageEmission": 13586,
   "hauls": {
     "long": {
       "maxKm": 20000,
@@ -18,5 +17,9 @@
     "economy": 1,
     "business": 2.2,
     "first": 4
+  },
+  "study": {
+    "totalEmission": 8.8e9,
+    "passengerCount": 70.06e6
   }
 }

@@ -28,11 +28,14 @@ export enum HaulE {
 
 // Data factors constant used to compute emissions
 export type DataI = {
-  averageEmission: number;
   hauls: {
     [key in keyof typeof HaulE]: { maxKm: number; emissionFactor: number };
   };
   seats: { [key: string]: number };
+  study: {
+    totalEmission: number;
+    passengerCount: number;
+  };
 };
 
 // Travel informations

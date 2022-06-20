@@ -177,7 +177,8 @@ export default class Flight {
    */
   getEmissionAvg = (): number => {
     if (this.avgEmission) return this.avgEmission;
-    this.avgEmission = this.data.averageEmission;
+    this.avgEmission =
+      this.data.study.totalEmission / this.data.study.passengerCount;
     return this.avgEmission;
   };
 }
