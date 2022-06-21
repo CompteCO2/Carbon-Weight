@@ -64,7 +64,8 @@ export const getDistance = (
 };
 
 export default class Flight {
-  private avgEmission: number | undefined; // Singleton average computation
+  private avgEmission: number | undefined; // Singleton average computation (per people)
+  private avgEmissionByPassenger: number | undefined; // Singleton average computation (per passenger)
   private data: DataI; // Factor Emissions Loaded
   private dataSet: DataE; // Factor Emissions Source
 
@@ -73,6 +74,7 @@ export default class Flight {
     this.data = data;
     this.dataSet = dataSet;
     this.avgEmission = undefined;
+    this.avgEmissionByPassenger = undefined;
   }
 
   /**
@@ -166,19 +168,34 @@ export default class Flight {
   };
 
   /**
-   * Return the average co2 estimation in peq.kgCO2e/year.
+   * Return the average co2 estimation in peq.kgCO2e/year (per person).
    *
    * @description
-   * This constant is the ratio emission(2019)/#passengers(2019) from
-   * the Directorate General of Civil Aviation (DGAC).
+   * This constant is the ratio totalEmission/#people
    *
    * @return
-   * The average co2 emission in peq.kgCO2e/year.
+   * The average co2 emission in peq.kgCO2e/year (per person).
    */
   getEmissionAvg = (): number => {
     if (this.avgEmission) return this.avgEmission;
     this.avgEmission =
-      this.data.study.totalEmission / this.data.study.passengerCount;
+      this.data.study.totalEmission / this.data.study.peopleCount;
     return this.avgEmission;
+  };
+
+  /**
+   * Return the average co2 estimation in peq.kgCO2e/year (per passenger).
+   *
+   * @description
+   * This constant is the ratio totalEmission/#passenger
+   *
+   * @return
+   * The average co2 emission in peq.kgCO2e/year (per passenger).
+   */
+  getEmissionAvgByPassenger = (): number => {
+    if (this.avgEmissionByPassenger) return this.avgEmissionByPassenger;
+    this.avgEmissionByPassenger =
+      this.data.study.totalEmission / this.data.study.passengerCount;
+    return this.avgEmissionByPassenger;
   };
 }

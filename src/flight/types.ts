@@ -35,6 +35,7 @@ export type DataI = {
   study: {
     totalEmission: number;
     passengerCount: number;
+    peopleCount: number;
   };
 };
 

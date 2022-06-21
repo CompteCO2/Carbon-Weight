@@ -20,6 +20,7 @@
   },
   "study": {
     "totalEmission": 8.8e9,
-    "passengerCount": 70.06e6
+    "passengerCount": 70.06e6,
+    "peopleCount": 67626396
   }
 }
