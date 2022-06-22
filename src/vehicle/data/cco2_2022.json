@@ -1,11 +1,11 @@
 {
   "emissionFactors": {
-    "E85": 2.178,
+    "E85": 2.67,
     "electric": 0,
-    "fuel": 2.178,
-    "gasoil": 2.514,
-    "GNV": 0.571,
-    "LPG": 1.671
+    "fuel": 2.67,
+    "gasoil": 2.85,
+    "GNV": 0.59,
+    "LPG": 1.73
   },
   "emissionFigure": {
     "yearStart": 1990,
@@ -329,7 +329,8 @@
     }
   },
   "study": {
-    "totalEmission": 80.6e9,
-    "carCount": 67064000
+    "totalEmission": 67.13e9,
+    "carCount": 37094312,
+    "peopleCount": 67626396
   }
 }

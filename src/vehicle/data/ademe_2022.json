@@ -330,6 +330,7 @@
   },
   "study": {
     "totalEmission": 73.2e9,
-    "carCount": 37094312
+    "carCount": 37094312,
+    "peopleCount": 67626396
   }
 }

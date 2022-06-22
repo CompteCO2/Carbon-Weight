@@ -2,18 +2,18 @@
 import Vehicle from "../";
 import { DataE } from "../types";
 
-describe("Testing constants consistency for CITEPA_2021", () => {
-  const vehicle = Vehicle.build(DataE.CITEPA_2021);
+describe("Testing constants consistency for CCO2_2021", () => {
+  const vehicle = Vehicle.build(DataE.CCO2_2021);
   const data = vehicle.getData();
   test("Check data", () => expect(data).toBeDefined());
   test("Check dataset", () =>
-    expect(vehicle.getDataset()).toBe(DataE.CITEPA_2021));
+    expect(vehicle.getDataset()).toBe(DataE.CCO2_2021));
   test("Check min e-factors", () =>
     expect(Object.keys(data.emissionFactors).length).toBe(6));
 });
 
-describe("Testing constants - Testing the national average for CITEPA_2021", () => {
-  const vehicle = Vehicle.build(DataE.CITEPA_2021);
+describe("Testing constants - Testing the national average for CCO2_2021", () => {
+  const vehicle = Vehicle.build(DataE.CCO2_2021);
   test("Check national emission (by person)", () =>
     expect(Math.floor(vehicle.getEmissionAvg())).toBe(1194));
   test("Check national emission (by vehicle)", () =>

@@ -1,8 +1,10 @@
 // Data sets available
 export enum DataE {
   "ADEME_2022" = "ADEME_2022",
+  "CCO2_2021" = "CCO2_2021",
   "CCO2_2022" = "CCO2_2022",
-  "CITEPA_2021" = "CITEPA_2021"
+  "CITEPA_2021" = "CITEPA_2021",
+  "CITEPA_2022" = "CITEPA_2022"
 }
 
 // Fuel types available
@@ -59,6 +61,7 @@ export type DataI = {
   emissionFigure?: FigureT;
   study: {
     totalEmission: number;
-    carCount: number;
+    carCount?: number;
+    peopleCount: number;
   };
 };

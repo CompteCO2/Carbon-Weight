@@ -10,7 +10,7 @@ type DataI = {
 
 // Run all the tests for a given dataset
 const runner = (dataset: DataI[]) => {
-  const vehicle = Vehicle.build(DataE.CCO2_2022);
+  const vehicle = Vehicle.build(DataE.CITEPA_2022);
   dataset.forEach((data: DataI) => {
     test(data.testDescription + " - Emission", () =>
       expect(Math.floor(vehicle.getEmissionMileage(data.vehicle))).toBe(

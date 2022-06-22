@@ -3,16 +3,21 @@ import { ConsumptionT, DataE, DataI, ModelT, VehicleT } from "./types";
 // Data sets available
 // Note: avoid dealing with dynamic loading drawbacks
 import ADEME_2022 from "./data/ademe_2022.json";
+import CCO2_2021 from "./data/cco2_2021.json";
 import CCO2_2022 from "./data/cco2_2022.json";
 import CITEPA_2021 from "./data/citepa_2021.json";
+import CITEPA_2022 from "./data/citepa_2022.json";
 const DATA = {
   ADEME_2022: ADEME_2022 as DataI,
+  CCO2_2021: CCO2_2021 as DataI,
   CCO2_2022: CCO2_2022 as DataI,
-  CITEPA_2021: CITEPA_2021 as DataI
+  CITEPA_2021: CITEPA_2021 as DataI,
+  CITEPA_2022: CITEPA_2022 as DataI
 };
 
 export default class Vehicle {
-  private avgEmission: number | undefined; // Singleton average computation
+  private avgEmission: number | undefined; // Singleton average computation (by people)
+  private avgEmissionByVehicle: number | undefined; // Singleton average computation (by vehicle)
   private data: DataI; // Factor Emissions Loaded
   private dataSet: DataE; // Factor Emissions Source
 
@@ -21,6 +26,7 @@ export default class Vehicle {
     this.data = data;
     this.dataSet = dataSet;
     this.avgEmission = undefined;
+    this.avgEmissionByVehicle = undefined;
   }
 
   /**
@@ -98,9 +104,29 @@ export default class Vehicle {
   };
 
   /**
-   * Return the average co2 estimation from PC (private vehicle) in kgCO2e/year.
+   * Return the average co2 estimation from PC (private vehicle) in kgCO2e/year (by person).
    *
    * @TODO review, source and explain differents computation
+   *
+   * @description
+   * It is a simple proportion taking the total private vehicle emission estimated from private vehicle
+   * divided by the number of people.
+   *
+   * emission = emissions / #people
+   * [kgCO2e/year/vehicle] = [kgCO2e/kg/year] / [people]
+   *
+   * @return
+   * The estimated co2 emission in kgCO2e/year (per people)
+   */
+  getEmissionAvg = (): number => {
+    if (this.avgEmission) return this.avgEmission;
+    this.avgEmission =
+      this.data.study.totalEmission / this.data.study.peopleCount;
+    return this.avgEmission;
+  };
+
+  /**
+   * Return the average co2 estimation by PC (private vehicle) in kgCO2e/year (by vehicle).
    *
    * @description
    * It is a simple proportion taking the total private vehicle emission estimated from private vehicle
@@ -109,15 +135,15 @@ export default class Vehicle {
    * emission = emissions / #vehicles
    * [kgCO2e/year/vehicle] = [kgCO2e/kg/year] / [vehicle]
    *
-   * @param dataset - the factor emission source
-   *
    * @return
    * The estimated co2 emission in kgCO2e/year (per vehicle)
    */
-  getEmissionAvg = (): number => {
-    if (this.avgEmission) return this.avgEmission;
-    this.avgEmission = this.data.study.totalEmission / this.data.study.carCount;
-    return this.avgEmission;
+  getEmissionAvgByVehicle = (): number => {
+    if (this.avgEmissionByVehicle) return this.avgEmissionByVehicle;
+    this.avgEmissionByVehicle = this.data.study.carCount
+      ? this.data.study.totalEmission / this.data.study.carCount
+      : -1;
+    return this.avgEmissionByVehicle;
   };
 
   /**

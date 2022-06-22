@@ -20,6 +20,8 @@ describe("Testing constants consistency for ADEME_2022", () => {
 
 describe("Testing constants - Testing the national average for ADEME_2022", () => {
   const vehicle = Vehicle.build(DataE.ADEME_2022);
-  test("Check national emission", () =>
-    expect(vehicle.getEmissionAvg()).toBeCloseTo(1973.35, 0));
+  test("Check national emission (by person)", () =>
+    expect(vehicle.getEmissionAvg()).toBeCloseTo(1082.4, 0));
+  test("Check national emission (by vehicle)", () =>
+    expect(vehicle.getEmissionAvgByVehicle()).toBeCloseTo(1973.35, 0));
 });

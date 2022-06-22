@@ -10,7 +10,7 @@ type DataI = {
 
 // Run all the tests for a given dataset
 const runner = (dataset: DataI[]) => {
-  const vehicle = Vehicle.build(DataE.CCO2_2022);
+  const vehicle = Vehicle.build(DataE.CCO2_2021);
   dataset.forEach((data: DataI) => {
     test(data.testDescription + " - Emission", () =>
       expect(Math.floor(vehicle.getEmissionMileage(data.vehicle))).toBe(
@@ -59,22 +59,22 @@ const NUL_DATA = [
 const SAMPLE_DATA = [
   {
     vehicle: { consumption: 10, distanceByYear: 10000, fuel: FuelE.E85 },
-    expectedResult: 2670,
+    expectedResult: 2178,
     testDescription: "Drive 10 000Km using 10L/100km --> (1000L eq) of E85"
   },
   {
     vehicle: { consumption: 7, distanceByYear: 10000, fuel: FuelE.gasoil },
-    expectedResult: 1995,
+    expectedResult: 1759,
     testDescription: "Drive 10 000Km driving 7L/100km - Gasoil"
   },
   {
     vehicle: { consumption: 7, distanceByYear: 10000, fuel: FuelE.GNV },
-    expectedResult: 413,
+    expectedResult: 399,
     testDescription: "Drive 10 000Km driving 7L/100km - GNV"
   },
   {
     vehicle: { consumption: 7, distanceByYear: 10000, fuel: FuelE.fuel },
-    expectedResult: 1869,
+    expectedResult: 1524,
     testDescription: "Drive 10 000Km driving 7L/100km - Fuel (Petrol)"
   },
   {

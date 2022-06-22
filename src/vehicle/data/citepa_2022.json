@@ -1,0 +1,14 @@
+{
+  "emissionFactors": {
+    "E85": 2.67,
+    "electric": 0,
+    "fuel": 2.67,
+    "gasoil": 2.85,
+    "GNV": 0.59,
+    "LPG": 1.73
+  },
+  "study": {
+    "totalEmission": 67.13e9,
+    "peopleCount": 67626396
+  }
+}
