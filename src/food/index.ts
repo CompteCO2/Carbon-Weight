@@ -11,14 +11,6 @@ import {
 //
 const WEEK_RANGE = { min: 0, max: 14 };
 
-export type Types = {
-  DataE: DataE;
-  FoodE: FoodE;
-  ComsumptionR: ComsumptionR;
-  ConsumptionT: ConsumptionT;
-  WasteE: WasteE;
-};
-
 /**
  * Transform raw data factors from ADEME to the ones used by the calculator
  *

@@ -15,7 +15,7 @@ describe("Testing constants consistency for CITEPA_2021", () => {
 describe("Testing constants - Testing the national average for CITEPA_2021", () => {
   const vehicle = Vehicle.build(DataE.CITEPA_2021);
   test("Check national emission (by person)", () =>
-    expect(Math.floor(vehicle.getEmissionAvg())).toBe(1194));
+    expect(Math.round(vehicle.getEmissionAvg())).toBe(1195));
   test("Check national emission (by vehicle)", () =>
     expect(vehicle.getEmissionAvgByVehicle()).toBe(-1));
 });

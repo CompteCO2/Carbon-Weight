@@ -21,7 +21,7 @@ describe("Testing constants consistency for CCO2_2022", () => {
 describe("Testing constants - Testing the national average for CCO2_2022", () => {
   const vehicle = Vehicle.build(DataE.CCO2_2022);
   test("Check national emission (by person)", () =>
-    expect(Math.floor(vehicle.getEmissionAvg())).toBe(992));
+    expect(Math.round(vehicle.getEmissionAvg())).toBe(1002));
   test("Check national emission (by vehicle)", () =>
-    expect(vehicle.getEmissionAvgByVehicle()).toBeCloseTo(1809.71, 0));
+    expect(Math.round(vehicle.getEmissionAvgByVehicle())).toBe(1826));
 });

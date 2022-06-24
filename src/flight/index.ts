@@ -1,26 +1,9 @@
-import {
-  AirportI,
-  AirportsI,
-  DataE,
-  DataI,
-  FlightI,
-  HaulE,
-  SeatE
-} from "./types";
+import { AirportsI, DataE, DataI, FlightI, HaulE } from "./types";
 //
 import airportsJSON from "./data/airports.json";
 const AIRPORTS = airportsJSON as AirportsI;
 //
 const EARTH_RADIUS = 6371; // Radius of the earth in Km
-
-export type Types = {
-  DataE: DataE;
-  AirportI: AirportI;
-  AirportsI: AirportsI;
-  FlightI: FlightI;
-  HaulE: HaulE;
-  SeatE: SeatE;
-};
 
 //
 // Data sets available

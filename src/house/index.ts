@@ -8,14 +8,6 @@ import {
   YearE
 } from "./types";
 
-export type Types = {
-  DataE: DataE;
-  HeaterE: HeaterE;
-  HouseE: HouseE;
-  HouseT: HouseT;
-  YearE: YearE;
-};
-
 //
 // Data sets available
 // Note: avoid dealing with dynamic loading drawbacks

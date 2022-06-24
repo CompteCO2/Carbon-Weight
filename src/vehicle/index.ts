@@ -1,21 +1,4 @@
-import {
-  ConsumptionT,
-  DataE,
-  DataI,
-  FuelE,
-  ModelT,
-  VehicleE,
-  VehicleT
-} from "./types";
-
-export type Types = {
-  ConsumptionT: ConsumptionT;
-  DataE: DataE;
-  FuelE: FuelE;
-  ModelT: ModelT;
-  VehicleE: VehicleE;
-  VehicleT: VehicleT;
-};
+import { ConsumptionT, DataE, DataI, ModelT, VehicleT } from "./types";
 
 //
 // Data sets available
