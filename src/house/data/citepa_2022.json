@@ -7,13 +7,13 @@
       "energyFactor": 0.084
     },
     "fuelOil": {
-      "energyFactor": 2.68
+      "energyFactor": 2.693
     },
     "gas": {
-      "energyFactor": 0.187
+      "energyFactor": 0.183
     },
     "propane": {
-      "energyFactor": 2.98
+      "energyFactor": 2.91
     },
     "urban": {
       "energyFactor": 0.056
@@ -23,7 +23,7 @@
     }
   },
   "study": {
-    "totalEmission": 43.7e9,
-    "peopleCount": 67454122
+    "totalEmission": 47.8e9,
+    "peopleCount": 67626396
   }
 }

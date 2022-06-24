@@ -11,6 +11,14 @@ import {
 //
 const WEEK_RANGE = { min: 0, max: 14 };
 
+export type Types = {
+  DataE: DataE;
+  FoodE: FoodE;
+  ComsumptionR: ComsumptionR;
+  ConsumptionT: ConsumptionT;
+  WasteE: WasteE;
+};
+
 /**
  * Transform raw data factors from ADEME to the ones used by the calculator
  *
@@ -53,6 +61,9 @@ export default class Food {
   private data: DataI; // Factor Emissions Loaded
   private dataSet: DataE; // Factor Emissions Source
 
+  /**
+   * @warning use the static build method using dataset enum type DataE
+   */
   constructor(dataSet: DataE, data: DataI) {
     if (!data) throw new Error("Cannot be instanciated without dataset");
     this.data = data;

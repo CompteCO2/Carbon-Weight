@@ -1,5 +1,9 @@
 {
   "emissionFactors": {
+    "coal": {
+      "emissionFactor": -1,
+      "energyFactor": 2.687
+    },
     "electric": {
       "emissionFactor": 0.079,
       "energyFactor": 0.079
@@ -12,13 +16,9 @@
       "emissionFactor": 0.244,
       "energyFactor": 3.23
     },
-    "GPL": {
-      "emissionFactor": 0.275,
-      "energyFactor": 3.45
-    },
     "propane": {
       "emissionFactor": 0.275,
-      "energyFactor": -1
+      "energyFactor": 3.45
     },
     "urban": {
       "emissionFactor": 0.109,
@@ -47,7 +47,7 @@
           "surface": 71,
           "part": 26.05
         },
-        "GPL": {
+        "propane": {
           "emissionFactor": 101,
           "surface": 87,
           "part": 0.05
@@ -79,7 +79,7 @@
           "surface": 105,
           "part": 16.1
         },
-        "GPL": {
+        "propane": {
           "emissionFactor": 139,
           "surface": 114,
           "part": 1.25
@@ -113,7 +113,7 @@
           "surface": 71,
           "part": 26.05
         },
-        "GPL": {
+        "propane": {
           "emissionFactor": 80,
           "surface": 86,
           "part": 0.05
@@ -145,7 +145,7 @@
           "surface": 112,
           "part": 16.1
         },
-        "GPL": {
+        "propane": {
           "emissionFactor": 129,
           "surface": 116,
           "part": 1.25
@@ -165,6 +165,7 @@
   },
   "study": {
     "apartment": 12276500,
-    "house": 16103200
+    "house": 16103200,
+    "peopleCount": 67626396
   }
 }

@@ -2,7 +2,7 @@ import House from "../";
 import { DataE, HeaterE } from "../types";
 
 describe("Testing emission consummed (often straight from the bills)", () => {
-  const house = House.build(DataE.CCO2_2022);
+  const house = House.build(DataE.CCO2_2021);
   test("Urban consumption energy", () => {
     expect(
       Math.floor(house.getEmissionConsumed([2000], HeaterE.urban))
@@ -16,12 +16,12 @@ describe("Testing emission consummed (often straight from the bills)", () => {
   test("Simple consumption (Last Month)", () => {
     expect(
       Math.floor(house.getEmissionConsumed([1000], HeaterE.fuelOil))
-    ).toEqual(2693);
+    ).toEqual(2680);
   });
   test("Negative consumption (provider correction)", () => {
     expect(
       Math.floor(house.getEmissionConsumed([-1000], HeaterE.fuelOil))
-    ).toEqual(-2693);
+    ).toEqual(-2680);
   });
   test("Positive/Negative consumption compensation", () => {
     expect(
@@ -40,7 +40,7 @@ describe("Testing emission consummed (often straight from the bills)", () => {
       Math.floor(
         house.getEmissionConsumed(Array(12).fill(1000), HeaterE.fuelOil)
       )
-    ).toEqual(32316);
+    ).toEqual(32160);
   });
   test("Hald a Year with a Consumption - Half with Another", () => {
     expect(
@@ -52,6 +52,6 @@ describe("Testing emission consummed (often straight from the bills)", () => {
           HeaterE.fuelOil
         )
       )
-    ).toEqual(24237);
+    ).toEqual(24120);
   });
 });

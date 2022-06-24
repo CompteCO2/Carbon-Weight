@@ -1,9 +1,27 @@
-import { AirportsI, DataE, DataI, FlightI, HaulE } from "./types";
+import {
+  AirportI,
+  AirportsI,
+  DataE,
+  DataI,
+  FlightI,
+  HaulE,
+  SeatE
+} from "./types";
 //
 import airportsJSON from "./data/airports.json";
 const AIRPORTS = airportsJSON as AirportsI;
 //
 const EARTH_RADIUS = 6371; // Radius of the earth in Km
+
+export type Types = {
+  DataE: DataE;
+  AirportI: AirportI;
+  AirportsI: AirportsI;
+  FlightI: FlightI;
+  HaulE: HaulE;
+  SeatE: SeatE;
+};
+
 //
 // Data sets available
 // Note: avoid dealing with dynamic loading drawbacks
@@ -69,6 +87,9 @@ export default class Flight {
   private data: DataI; // Factor Emissions Loaded
   private dataSet: DataE; // Factor Emissions Source
 
+  /**
+   * @warning use the static build method using dataset enum type DataE
+   */
   constructor(dataSet: DataE, data: DataI) {
     if (!data) throw new Error("Cannot be instanciated without dataset");
     this.data = data;

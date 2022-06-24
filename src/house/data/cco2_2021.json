@@ -6,166 +6,25 @@
   },
   "emissionFactors": {
     "coal": {
-      "emissionFactor": -1,
       "energyFactor": 2.666
     },
     "electric": {
-      "emissionFactor": 0.079,
       "energyFactor": 0
     },
     "fuelOil": {
-      "emissionFactor": 0.324,
-      "energyFactor": 2.693
+      "energyFactor": 2.68
     },
     "gas": {
-      "emissionFactor": 0.244,
-      "energyFactor": 0.183
+      "energyFactor": 0.187
     },
     "propane": {
-      "emissionFactor": 0.275,
-      "energyFactor": 2.91
+      "energyFactor": 2.98
     },
     "urban": {
-      "emissionFactor": 0.109,
       "energyFactor": 0
     },
     "wood": {
-      "emissionFactor": 0.0295,
       "energyFactor": 0
-    }
-  },
-  "consumptionFactors": {
-    "old": {
-      "apartment": {
-        "electric": {
-          "emissionFactor": 98,
-          "surface": 49,
-          "part": 16.4
-        },
-        "fuelOil": {
-          "emissionFactor": 172,
-          "surface": 89,
-          "part": 2.55
-        },
-        "gas": {
-          "emissionFactor": 146,
-          "surface": 71,
-          "part": 26.05
-        },
-        "propane": {
-          "emissionFactor": 101,
-          "surface": 87,
-          "part": 0.05
-        },
-        "wood": {
-          "emissionFactor": 211,
-          "surface": 79,
-          "part": 0.25
-        },
-        "urban": {
-          "emissionFactor": 255,
-          "surface": 71,
-          "part": 4.65
-        }
-      },
-      "house": {
-        "electric": {
-          "emissionFactor": 150,
-          "surface": 96,
-          "part": 19.35
-        },
-        "fuelOil": {
-          "emissionFactor": 187,
-          "surface": 119,
-          "part": 9.25
-        },
-        "gas": {
-          "emissionFactor": 201,
-          "surface": 105,
-          "part": 16.1
-        },
-        "propane": {
-          "emissionFactor": 139,
-          "surface": 114,
-          "part": 1.25
-        },
-        "wood": {
-          "emissionFactor": 290,
-          "surface": 106,
-          "part": 3.9
-        },
-        "urban": {
-          "emissionFactor": -1,
-          "surface": -1,
-          "part": 0.2
-        }
-      }
-    },
-    "recent": {
-      "apartment": {
-        "electric": {
-          "emissionFactor": 65,
-          "surface": 53,
-          "part": 16.4
-        },
-        "fuelOil": {
-          "emissionFactor": 162,
-          "surface": 88,
-          "part": 2.55
-        },
-        "gas": {
-          "emissionFactor": 125,
-          "surface": 71,
-          "part": 26.05
-        },
-        "propane": {
-          "emissionFactor": 80,
-          "surface": 86,
-          "part": 0.05
-        },
-        "wood": {
-          "emissionFactor": 172,
-          "surface": 79,
-          "part": 0.25
-        },
-        "urban": {
-          "emissionFactor": 230,
-          "surface": 70,
-          "part": 4.65
-        }
-      },
-      "house": {
-        "electric": {
-          "emissionFactor": 106,
-          "surface": 110,
-          "part": 19.35
-        },
-        "fuelOil": {
-          "emissionFactor": 171,
-          "surface": 120,
-          "part": 9.25
-        },
-        "gas": {
-          "emissionFactor": 166,
-          "surface": 112,
-          "part": 16.1
-        },
-        "propane": {
-          "emissionFactor": 129,
-          "surface": 116,
-          "part": 1.25
-        },
-        "wood": {
-          "emissionFactor": 235,
-          "surface": 114,
-          "part": 3.9
-        },
-        "urban": {
-          "emissionFactor": -1,
-          "surface": -1,
-          "part": 0.2
-        }
-      }
     }
   },
   "regions": [
@@ -651,9 +510,7 @@
     }
   ],
   "study": {
-    "totalEmission": 47.8e9,
-    "peopleCount": 67626396,
-    "apartment": 12276500,
-    "house": 16103200
+    "totalEmission": 43.7e9,
+    "peopleCount": 67454122
   }
 }

@@ -2,11 +2,11 @@ import House from "../";
 import { DataE, HeaterE } from "../types";
 
 describe("Testing emission consummed (often straight from the bills)", () => {
-  const house = House.build(DataE.CCO2_2022);
-  test("Urban consumption energy", () => {
+  const house = House.build(DataE.CITEPA_2022);
+  test("Unknown consumption energy", () => {
     expect(
       Math.floor(house.getEmissionConsumed([2000], HeaterE.urban))
-    ).toEqual(0);
+    ).toEqual(112);
   });
   test("No consumption", () => {
     expect(Math.floor(house.getEmissionConsumed([0], HeaterE.fuelOil))).toEqual(
@@ -42,7 +42,7 @@ describe("Testing emission consummed (often straight from the bills)", () => {
       )
     ).toEqual(32316);
   });
-  test("Hald a Year with a Consumption - Half with Another", () => {
+  test("Half a Year with a Consumption - Half with Another", () => {
     expect(
       Math.floor(
         house.getEmissionConsumed(

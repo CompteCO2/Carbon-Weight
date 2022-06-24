@@ -1,4 +1,22 @@
-import { ConsumptionT, DataE, DataI, ModelT, VehicleT } from "./types";
+import {
+  ConsumptionT,
+  DataE,
+  DataI,
+  FuelE,
+  ModelT,
+  VehicleE,
+  VehicleT
+} from "./types";
+
+export type Types = {
+  ConsumptionT: ConsumptionT;
+  DataE: DataE;
+  FuelE: FuelE;
+  ModelT: ModelT;
+  VehicleE: VehicleE;
+  VehicleT: VehicleT;
+};
+
 //
 // Data sets available
 // Note: avoid dealing with dynamic loading drawbacks
@@ -21,6 +39,9 @@ export default class Vehicle {
   private data: DataI; // Factor Emissions Loaded
   private dataSet: DataE; // Factor Emissions Source
 
+  /**
+   * @warning use the static build method using dataset enum type DataE
+   */
   constructor(dataSet: DataE, data: DataI) {
     if (!data) throw new Error("Cannot be instanciated without dataset");
     this.data = data;

@@ -55,79 +55,13 @@ npm run build:release
 - Upload coverages.
 - Generate the documentation as interactive HTML pages (typedoc).
 
-# Methodology & Data
+# Methodology, Data & API
 
-Here are the methodologies and data used for our CO2 emission calculator. Please keep in mind that all emission computed are given in **kgCO2e/year**. The data sourced below come from the French Government and UE Official agencies. Fell free to add you own data and contribute with them to enhance internationalization capacity.
+Please follow our [wiki](https://github.com/CompteCO2/Carbon-Weight/wiki) to get a full insight of our computation an data sources.
 
-## Flight Emissions
+The API documentation is contained within this wiki.
 
-First, the distances are calculated between the airports selected, using the greater circle method: we compute the **distance in Km** from longitude and latitude using the haversine formula (cf. https://en.wikipedia.org/wiki/Haversine_formula).
-
-Then we can use the factor emission (cf. wiki below) to get our first estimation per equivalent person:
-
-- Emission = Distance \* Factor
-- [kgCO2e/year] = [km/year] \* [kgCO2e/km]
-
-Finally, we add a factor depending on the class of the seat taken (economy class, business class, first class). Connections are not taken into account.
-
-Want more insight about the distance computation and factors in use ? Here is the wiki page dedicated:
-
-### [Flight Methodology](https://github.com/CompteCO2/Carbon-Weight/wiki/Flight-Emissions)
-
-### [Flight API](https://github.com/CompteCO2/Carbon-Weight/wiki/Flight-API)
-
-## Food Emissions
-
-The idea is to compute a quite rough co2 emission (kgCO2e/year) estimate from weekly eating habits. The weekly consumption based has been choosen for its convenience to be estimated by an individual.
-
-The food carbon footprint is by design a best estimate, this approximation still allows to get an order of magnitude. The formula in use, is as simple as :
-
-- emission = Sum[ (weaklyConsumed \* averageWeight * 52) / 1000 \* carbonEmissionFactor ]
-- waste = SUM[ (weaklyConsumed \* averageWeight * 52) / 1000 \* wasteRatioFactor \* wasteEmissionFactor ]
-
-Here are the factor units in use:
-
-- [kgCO2e/year] = (52[g/week]) / 1000 \* [kgCO2e/kg]
-- [kgCO2e/year] = (52[g/week]) / 1000 \* [kgPackaging/kg] \* [kgCO2e/kgPackaging]
-
-Want more insight about the factors in use ? Here is the wiki page dedicated:
-
-### [Food Methodology](https://github.com/CompteCO2/Carbon-Weight/wiki/Food-Emissions)
-
-### [Food API](https://github.com/CompteCO2/Carbon-Weight/wiki/Food-API)
-
-## House Emissions
-
-We compute here the CO2e emission estimation from heating housing with this simple computation:
-
-- Emission = Surface \* ConsumptionFactor \* CombustibleFactor \* ClimateCoef
-- [kgCO2e/year] = [m²] \* [kWh/(m².year)] \* [kgCO2e/kW] \* Cste
-
-Want more insight about the classifications and factors in use ? Here is the wiki page dedicated:
-
-### [House Methodology](https://github.com/CompteCO2/Carbon-Weight/wiki/House-Emissions)
-
-### [House API](https://github.com/CompteCO2/Carbon-Weight/wiki/House-API)
-
-## Vehicle Emissions
-
-The carbon footprint from car usage can be calculated using different methods, providing the result in differing levels of accuracy. We propose two computations :
-
-- **From Fuel Consumption**: Type of Fuel and, Consumption or Annual Mileage and actual MPG.
-- **From Registration Card**: Type of Fuel, Mileage and original emission factor or consumption factor.
-- **From Car Type**: Annual Mileage and the gCO2/km figure (explained below).
-
-Although the first computation method is the most precise, it relies on a parameter that could be quite uncertain (depends on personal measure) or even unknown. Indeed, the exact MPG (real consumption) for the period of the annual mileage could be difficult to get with precision if not measured properly.
-
-This is the best choice if you cannot guarantee the actual MPG. This method is based on the constructor factor emission corrected by the vehicle age.
-
-The last one is the least precise, but still allows you to get a fairly good CO2 emission estimation of your vehicle from only the car type and your annual mileage.
-
-Want more insight about the different methods and factors in use ? Here is the wiki page dedicated:
-
-### [House Methodology](https://github.com/CompteCO2/Carbon-Weight/wiki/Vehicle-Emissions)
-
-### [House API](https://github.com/CompteCO2/Carbon-Weight/wiki/Vehicle-API)
+You may also get pratical use cases within UTs.
 
 # Contribute
 

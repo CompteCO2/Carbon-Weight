@@ -36,7 +36,8 @@ describe("Testing data loaded", () => {
 
 describe("Testing constants - Testing the national average", () => {
   const house = House.build(DataE.ADEME_2022);
-  const emissionAvg = house.getEmissionAvg();
-  test("Check national emission", () =>
-    expect(Math.floor(emissionAvg)).toBe(2301));
+  test("Check national emission (by person)", () =>
+    expect(Math.round(house.getEmissionAvg())).toBe(1130));
+  test("Check national emission (by house/apartment)", () =>
+    expect(Math.round(house.getEmissionAvgByHouse())).toBe(2694));
 });
