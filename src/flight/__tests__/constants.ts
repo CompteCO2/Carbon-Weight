@@ -54,9 +54,9 @@ describe("Testing constants - Test haversine implementation with known value", (
 describe("Testing constants - Test emission factor constants (AVGs + Hauls)", () => {
   const flight = Flight.build(DataE.ADEME_2022);
   test("Check data: Average (per person)", () =>
-    expect(Math.round(flight.getEmissionAvg())).toBe(130));
+    expect(Math.round(flight.getEmissionAvg())).toBe(179));
   test("Check data: Average (per passenger)", () =>
-    expect(Math.round(flight.getEmissionAvgByPassenger())).toBe(126));
+    expect(Math.round(flight.getEmissionAvgByPassenger())).toBe(173));
   test("Check data: Long Haul", () =>
     expect(flight.getHaulFactor(9362)).toBe(0.083));
   test("Check data: Medium Haul", () =>
