@@ -31609,6 +31609,13 @@
     "lat": 34.86920166015625,
     "lon": 48.5525016784668
   },
+  "DOH": {
+    "name": "Hamad International Airport",
+    "city": "Doha",
+    "country": "Qatar",
+    "lat": 25.270498918,
+    "lon": 51.604830914
+  },
   "MRQ": {
     "name": "Marinduque Aéroport",
     "city": "Gasan",
