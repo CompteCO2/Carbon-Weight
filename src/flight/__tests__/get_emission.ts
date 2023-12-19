@@ -28,11 +28,11 @@ const WRONG_DATA = [
       toIATA: "CPT",
       nbPassengers: 1,
       roundTrip: true,
-      seatType: SeatE.economy
+      seatType: SeatE.economy,
     },
     nbFlights: -1,
     expectedResult: -1,
-    testDescription: "Negative nb Flights"
+    testDescription: "Negative nb Flights",
   },
   {
     flight: {
@@ -40,11 +40,11 @@ const WRONG_DATA = [
       toIATA: "CPT",
       nbPassengers: -1,
       roundTrip: true,
-      seatType: SeatE.economy
+      seatType: SeatE.economy,
     },
     nbFlights: 1,
     expectedResult: -1,
-    testDescription: "Negative nb passengers"
+    testDescription: "Negative nb passengers",
   },
   {
     flight: {
@@ -52,12 +52,12 @@ const WRONG_DATA = [
       toIATA: "XXX",
       nbPassengers: -1,
       roundTrip: true,
-      seatType: SeatE.economy
+      seatType: SeatE.economy,
     },
     nbFlights: 1,
     expectedResult: -1,
-    testDescription: "Unknown airport"
-  }
+    testDescription: "Unknown airport",
+  },
 ];
 
 const NUL_DATA = [
@@ -67,11 +67,11 @@ const NUL_DATA = [
       toIATA: "CPT",
       nbPassengers: 0,
       roundTrip: true,
-      seatType: SeatE.economy
+      seatType: SeatE.economy,
     },
     nbFlights: 1,
     expectedResult: 0,
-    testDescription: "No passengers"
+    testDescription: "No passengers",
   },
   {
     flight: {
@@ -79,12 +79,12 @@ const NUL_DATA = [
       toIATA: "CPT",
       nbPassengers: 1,
       roundTrip: true,
-      seatType: SeatE.economy
+      seatType: SeatE.economy,
     },
     nbFlights: 0,
     expectedResult: 0,
-    testDescription: "No flights"
-  }
+    testDescription: "No flights",
+  },
 ];
 
 const SAMPLE_DATA = [
@@ -94,12 +94,12 @@ const SAMPLE_DATA = [
       toIATA: "CPT",
       nbPassengers: 1,
       roundTrip: false,
-      seatType: SeatE.economy
+      seatType: SeatE.economy,
     },
     nbFlights: 1,
     expectedResult: 777,
     testDescription:
-      "One rountrip a Year - Paris - Cap Town - 1 economy one way"
+      "One rountrip a Year - Paris - Cap Town - 1 economy one way",
   },
   {
     flight: {
@@ -107,12 +107,12 @@ const SAMPLE_DATA = [
       toIATA: "CPT",
       nbPassengers: 1,
       roundTrip: true,
-      seatType: SeatE.economy
+      seatType: SeatE.economy,
     },
     nbFlights: 1,
     expectedResult: 1554,
     testDescription:
-      "One rountrip a Year - Paris - Cap Town - 1 economy rountrip"
+      "One rountrip a Year - Paris - Cap Town - 1 economy rountrip",
   },
   {
     flight: {
@@ -120,12 +120,12 @@ const SAMPLE_DATA = [
       toIATA: "CPT",
       nbPassengers: 1,
       roundTrip: true,
-      seatType: SeatE.business
+      seatType: SeatE.business,
     },
     nbFlights: 1,
     expectedResult: 3419,
     testDescription:
-      "One rountrip a Year - Paris - Cap Town - 1 business rountrip"
+      "One rountrip a Year - Paris - Cap Town - 1 business rountrip",
   },
   {
     flight: {
@@ -133,12 +133,12 @@ const SAMPLE_DATA = [
       toIATA: "CPT",
       nbPassengers: 1,
       roundTrip: true,
-      seatType: SeatE.first
+      seatType: SeatE.first,
     },
     nbFlights: 1,
     expectedResult: 6216,
     testDescription:
-      "One rountrip a Year - Paris - Cap Town - 1 first class rountrip"
+      "One rountrip a Year - Paris - Cap Town - 1 first class rountrip",
   },
   {
     flight: {
@@ -146,12 +146,12 @@ const SAMPLE_DATA = [
       toIATA: "CPT",
       nbPassengers: 1,
       roundTrip: true,
-      seatType: SeatE.economy
+      seatType: SeatE.economy,
     },
     nbFlights: 2,
     expectedResult: 3108,
     testDescription:
-      "One rountrip a Year - Paris - Cap Town - 2 economy rountrip"
+      "One rountrip a Year - Paris - Cap Town - 2 economy rountrip",
   },
   {
     flight: {
@@ -159,12 +159,12 @@ const SAMPLE_DATA = [
       toIATA: "CPT",
       nbPassengers: 2,
       roundTrip: true,
-      seatType: SeatE.economy
+      seatType: SeatE.economy,
     },
     nbFlights: 1,
     expectedResult: 3108,
     testDescription:
-      "One rountrip a Year - Paris - Cap Town - 1 economy rountrip (2 per)"
+      "One rountrip a Year - Paris - Cap Town - 1 economy rountrip (2 per)",
   },
   {
     flight: {
@@ -172,13 +172,25 @@ const SAMPLE_DATA = [
       toIATA: "CPT",
       nbPassengers: 1,
       roundTrip: false,
-      seatType: SeatE.economy
+      seatType: SeatE.economy,
     },
     nbFlights: 2,
     expectedResult: 1554,
     testDescription:
-      "One rountrip a Year - Paris - Cap Town - 2 economy one way"
-  }
+      "One rountrip a Year - Paris - Cap Town - 2 economy one way",
+  },
+  {
+    flight: {
+      fromIATA: "CDG",
+      toIATA: "BAJ",
+      nbPassengers: 1,
+      roundTrip: false,
+      seatType: SeatE.economy,
+    },
+    nbFlights: 1,
+    expectedResult: 1177,
+    testDescription: "One flight - Paris - Bali - 1 economy one way",
+  },
 ];
 
 describe("Testing emission using wrong parameters", () => runner(WRONG_DATA));
